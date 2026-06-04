@@ -36,7 +36,7 @@ export default async function Home() {
           fontSize: "20px",
           fontWeight: 500,
           letterSpacing: "0.03em",
-        }}>Techlomerate</span>
+        }}>Techlomerate (tek-lom-uh-RAH-tee)</span>
         <span style={{
           fontSize: "12px",
           color: "var(--text-tertiary)",
@@ -172,4 +172,4 @@ export default async function Home() {
       </div>
     </main>
   )
-}
+} 

@@ -99,11 +99,31 @@ export default async function Home() {
                 fontFamily: "var(--font-serif)",
                 fontSize: "34px", fontWeight: 500,
                 lineHeight: 1.25, marginBottom: "18px", maxWidth: "600px",
-              }}>{featured.title}</h1>
+              }}>
+                <a
+                  href={featured.source_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "inherit", textDecoration: "none", borderBottom: "0.5px solid var(--border)" }}
+                >
+                  {featured.title}
+                </a>
+              </h1>
               <p style={{
                 fontSize: "15px", color: "var(--text-secondary)",
-                lineHeight: 1.85, maxWidth: "560px",
+                lineHeight: 1.85, maxWidth: "560px", marginBottom: "14px",
               }}>{featured.summary}</p>
+              <a
+                href={featured.source_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontSize: "12px", color: "var(--teal-600)",
+                  textDecoration: "none", letterSpacing: "0.04em",
+                }}
+              >
+                {featured.source_name} →
+              </a>
             </article>
           )}
 
@@ -120,10 +140,30 @@ export default async function Home() {
                   fontFamily: "var(--font-serif)",
                   fontSize: "17px", fontWeight: 500,
                   lineHeight: 1.4, marginBottom: "8px",
-                }}>{article.title}</h2>
-                <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.75 }}>
+                }}>
+                  <a
+                    href={article.source_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "inherit", textDecoration: "none", borderBottom: "0.5px solid var(--border)" }}
+                  >
+                    {article.title}
+                  </a>
+                </h2>
+                <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.75, marginBottom: "10px" }}>
                   {article.summary}
                 </p>
+                <a
+                  href={article.source_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontSize: "11px", color: "var(--teal-600)",
+                    textDecoration: "none", letterSpacing: "0.04em",
+                  }}
+                >
+                  {article.source_name} →
+                </a>
               </article>
             ))}
           </div>

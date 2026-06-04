@@ -17,7 +17,7 @@ export default async function Home() {
     .order('published_at', { ascending: false })
 
   const featured = articles?.find(a => a.featured)
-  const secondary = articles?.filter(a => !a.featured).slice(0, 2)
+  const secondary = articles?.filter(a => !a.featured).slice(0, 10)
 
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg)" }}>

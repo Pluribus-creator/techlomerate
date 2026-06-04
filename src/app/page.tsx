@@ -1,10 +1,23 @@
-export default function Home() {
+import { supabase } from '@/lib/supabase'
+
+export const revalidate = 60
+
+export default async function Home() {
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
     day: "numeric",
     year: "numeric",
-  });
+  })
+
+  const { data: articles } = await supabase
+    .from('articles')
+    .select('*')
+    .eq('status', 'approved')
+    .order('published_at', { ascending: false })
+
+  const featured = articles?.find(a => a.featured)
+  const secondary = articles?.filter(a => !a.featured).slice(0, 2)
 
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg)" }}>
@@ -76,71 +89,47 @@ export default function Home() {
 
         <div style={{ position: "relative", zIndex: 1 }}>
 
-          <article style={{ marginBottom: "48px" }}>
-            <div style={{
-              fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,
-              letterSpacing: "0.06em", marginBottom: "14px",
-            }}>Research</div>
-
-            <h1 style={{
-              fontFamily: "var(--font-serif)",
-              fontSize: "34px", fontWeight: 500,
-              lineHeight: 1.25, marginBottom: "18px", maxWidth: "600px",
-            }}>
-              Safety properties survive compression — a structural result, not a parameter setting
-            </h1>
-
-            <p style={{
-              fontSize: "15px", color: "var(--text-secondary)",
-              lineHeight: 1.85, maxWidth: "560px",
-            }}>
-              New work finds that ethical geometry holds at compression ratios up to 277:1.
-              If confirmed, this reframes alignment as a representational property — present
-              in the structure of meaning itself — rather than an applied constraint layered
-              over behavior.
-            </p>
-          </article>
+          {featured && (
+            <article style={{ marginBottom: "48px" }}>
+              <div style={{
+                fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,
+                letterSpacing: "0.06em", marginBottom: "14px",
+              }}>{featured.category}</div>
+              <h1 style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "34px", fontWeight: 500,
+                lineHeight: 1.25, marginBottom: "18px", maxWidth: "600px",
+              }}>{featured.title}</h1>
+              <p style={{
+                fontSize: "15px", color: "var(--text-secondary)",
+                lineHeight: 1.85, maxWidth: "560px",
+              }}>{featured.summary}</p>
+            </article>
+          )}
 
           <div style={{ borderTop: "0.5px solid var(--border)", marginBottom: "36px" }} />
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px" }}>
-            <article>
-              <div style={{
-                fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,
-                letterSpacing: "0.06em", marginBottom: "10px",
-              }}>Industry</div>
-              <h2 style={{
-                fontFamily: "var(--font-serif)",
-                fontSize: "17px", fontWeight: 500,
-                lineHeight: 1.4, marginBottom: "8px",
-              }}>
-                Open-source models outpace proprietary benchmarks on coding for the first time
-              </h2>
-              <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.75 }}>
-                Six months of weekly evals tell a clear story about the narrowing gap.
-              </p>
-            </article>
-
-            <article>
-              <div style={{
-                fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,
-                letterSpacing: "0.06em", marginBottom: "10px",
-              }}>Policy</div>
-              <h2 style={{
-                fontFamily: "var(--font-serif)",
-                fontSize: "17px", fontWeight: 500,
-                lineHeight: 1.4, marginBottom: "8px",
-              }}>
-                EU AI Act deadlines arrive as most mid-market firms admit they are not ready
-              </h2>
-              <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.75 }}>
-                The gap between awareness and readiness is widening faster than the window allows.
-              </p>
-            </article>
+            {secondary?.map(article => (
+              <article key={article.id}>
+                <div style={{
+                  fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,
+                  letterSpacing: "0.06em", marginBottom: "10px",
+                }}>{article.category}</div>
+                <h2 style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "17px", fontWeight: 500,
+                  lineHeight: 1.4, marginBottom: "8px",
+                }}>{article.title}</h2>
+                <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.75 }}>
+                  {article.summary}
+                </p>
+              </article>
+            ))}
           </div>
 
         </div>
       </div>
     </main>
-  );
+  )
 }

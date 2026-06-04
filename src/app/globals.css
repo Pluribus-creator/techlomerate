@@ -7,14 +7,13 @@
   --fg: #1C1C1A;
   --text-secondary: #5F5E5A;
   --text-tertiary: #888780;
-  --teal-600: #0F6E56;
-  --teal-400: #1D9E75;
-  --teal-200: #5DCAA5;
-  --teal-100: #9FE1CB;
-  --teal-50: #E1F5EE;
-  --border: rgba(28, 28, 26, 0.10);
-  --border-teal: #9FE1CB;
-}
+  --teal-600: #006B68;
+  --teal-400: #0ABAB5;
+  --teal-200: #81D8D0;
+  --teal-100: #B2E8E5;
+  --teal-50: #E0F4F3;
+  --border-teal: #B2E8E5;
+  }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 

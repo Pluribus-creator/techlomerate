@@ -57,8 +57,17 @@ export default async function Home() {
           textDecoration: "none",
         }}
       >
-        <div style={{ position: "absolute", top: 0, left: 0, background: "rgba(0,0,0,0.5)", color: "#fff", fontSize: "11px", fontWeight: 500, padding: "3px 8px", letterSpacing: "0.06em", zIndex: 2 }}>AD</div>
-        <div style={{ position: "absolute", top: 0, right: 0, background: "rgba(0,0,0,0.5)", color: "#fff", fontSize: "11px", fontWeight: 500, padding: "3px 8px", letterSpacing: "0.06em", zIndex: 2 }}>AD</div>
+       <div style={{
+          position: "absolute", top: 0, left: 0,
+          background: "rgba(0,0,0,0.4)",
+          color: "#fff",
+          fontSize: "11px",
+          fontWeight: 400,
+          padding: "3px 10px",
+          letterSpacing: "0.08em",
+          fontStyle: "italic",
+          zIndex: 2,
+        }}>broadside</div>
         <img
           src="/assets/applebannerad.png"
           alt="Apple"

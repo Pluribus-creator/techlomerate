@@ -20,7 +20,7 @@ export default async function Home() {
   const secondary = articles?.filter(a => !a.featured).slice(0, 10)
 
   return (
-    <main style={{ minHeight: "100vh", background: "var(--bg)", overflow: "clip" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg)" }}>
 
       <div style={{ height: "2px", background: "var(--teal-400)" }} />
 
@@ -30,10 +30,6 @@ export default async function Home() {
         justifyContent: "space-between",
         padding: "18px 40px",
         borderBottom: "0.5px solid var(--border-teal)",
-        position: "sticky",
-        top: 0,
-        zIndex: 99,
-        background: "var(--bg)",
       }}>
         <span style={{
           fontFamily: "var(--font-serif)",
@@ -55,23 +51,14 @@ export default async function Home() {
         style={{
           display: "block",
           position: "sticky",
-          top: "58px",
+          top: 0,
           zIndex: 100,
           borderBottom: "0.5px solid var(--border-teal)",
           textDecoration: "none",
         }}
       >
-       <div style={{
-          position: "absolute", top: 0, left: 0,
-          background: "rgba(0,0,0,0.4)",
-          color: "#fff",
-          fontSize: "11px",
-          fontWeight: 400,
-          padding: "3px 10px",
-          letterSpacing: "0.08em",
-          fontStyle: "italic",
-          zIndex: 2,
-        }}>broadside</div>
+        <div style={{ position: "absolute", top: 0, left: 0, background: "rgba(0,0,0,0.5)", color: "#fff", fontSize: "11px", fontWeight: 500, padding: "3px 8px", letterSpacing: "0.06em", zIndex: 2 }}>AD</div>
+        <div style={{ position: "absolute", top: 0, right: 0, background: "rgba(0,0,0,0.5)", color: "#fff", fontSize: "11px", fontWeight: 500, padding: "3px 8px", letterSpacing: "0.06em", zIndex: 2 }}>AD</div>
         <img
           src="/assets/applebannerad.png"
           alt="Apple"
@@ -79,7 +66,7 @@ export default async function Home() {
             width: "100%",
             height: "120px",
             objectFit: "cover",
-            objectPosition: "center 30%",
+            objectPosition: "center",
             display: "block",
           }}
         />

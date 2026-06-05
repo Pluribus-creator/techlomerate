@@ -20,7 +20,7 @@ export default async function Home() {
   const secondary = articles?.filter(a => !a.featured).slice(0, 10)
 
   return (
-    <main style={{ minHeight: "100vh", background: "var(--bg)" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg)", overflow: "clip" }}>
 
       <div style={{ height: "2px", background: "var(--teal-400)" }} />
 

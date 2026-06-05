@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { EB_Garamond, DM_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const serif = EB_Garamond({
@@ -15,8 +16,8 @@ const sans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Techlomerate",
-  description: "A record of the development of AI, held in stillness.",
+  title: "Techlomerate — AI news, clearly told",
+  description: "A daily record of artificial intelligence — curated, summarized, and held in stillness. Honest reporting without hype.",
 };
 
 export default function RootLayout({
@@ -26,7 +27,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

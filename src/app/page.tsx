@@ -66,7 +66,7 @@ export default async function Home() {
             width: "100%",
             height: "120px",
             objectFit: "cover",
-            objectPosition: "center",
+            objectPosition: "center 30%",
             display: "block",
           }}
         />

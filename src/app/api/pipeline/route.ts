@@ -16,10 +16,21 @@ const parser = new Parser()
 
 const FEEDS = [
   'https://www.technologyreview.com/feed/',
-  'https://feeds.feedburner.com/TheAIAlignmentForum',
+  'https://venturebeat.com/category/ai/feed/',
   'https://openai.com/news/rss.xml',
   'https://www.deepmind.com/blog/rss.xml',
-  'https://venturebeat.com/category/ai/feed/',
+  'https://anthropic.com/news/rss.xml',
+  'https://feeds.feedburner.com/TheAIAlignmentForum',
+  'https://jack-clark.net/feed/',
+  'https://www.theverge.com/ai-artificial-intelligence/rss/index.xml',
+  'https://techcrunch.com/category/artificial-intelligence/feed/',
+  'https://wired.com/feed/tag/artificial-intelligence/rss',
+  'https://www.reuters.com/technology/artificial-intelligence/rss',
+  'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml',
+  'https://feeds.a.dj.com/rss/RSSWSJD.xml',
+  'https://spectrum.ieee.org/feeds/feed.rss',
+  'https://www.thenationalnews.com/rss/technology',
+  'https://restofworld.org/feed/',
 ]
 
 function categorize(title: string, content: string): string {

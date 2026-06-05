@@ -18,6 +18,9 @@ const sans = DM_Sans({
 export const metadata: Metadata = {
   title: "Techlomerate — AI news, clearly told",
   description: "A daily record of artificial intelligence — curated, summarized, and held in stillness. Honest reporting without hype.",
+  verification: {
+    google: "iWnpECzPgqlifopKrFsdrBmHJTsMedRux3UhJOB0epI",
+  },
 };
 
 export default function RootLayout({

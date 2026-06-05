@@ -51,6 +51,15 @@ export async function GET(request: Request) {
   }
 
   try {
+    // Fetch existing URLs from database to deduplicate
+    const { data: existingArticles } = await supabase
+      .from('articles')
+      .select('source_url')
+
+    const existingUrls = new Set(
+      (existingArticles || []).map(a => a.source_url).filter(Boolean)
+    )
+
     // Fetch articles from RSS feeds
     const allItems: { title: string; link: string; sourceName: string; content: string }[] = []
 
@@ -58,7 +67,7 @@ export async function GET(request: Request) {
       try {
         const feed = await parser.parseURL(feedUrl)
         const sourceName = feed.title || feedUrl
-        const items = (feed.items || []).slice(0, 5).map(item => ({
+        const items = (feed.items || []).slice(0, 8).map(item => ({
           title: item.title || '',
           link: item.link || '',
           sourceName,
@@ -70,12 +79,15 @@ export async function GET(request: Request) {
       }
     }
 
-    if (allItems.length === 0) {
-      return NextResponse.json({ error: 'No articles fetched' }, { status: 500 })
+    // Filter out already-seen URLs
+    const newItems = allItems.filter(item => item.link && !existingUrls.has(item.link))
+
+    if (newItems.length === 0) {
+      return NextResponse.json({ success: true, inserted: 0, message: 'No new articles found' })
     }
 
     // Ask Claude to curate and summarize
-    const articleList = allItems
+    const articleList = newItems
       .map((item, i) => `${i + 1}. ${item.title}\nSource: ${item.sourceName}\nURL: ${item.link}\nSnippet: ${item.content}`)
       .join('\n\n')
 
@@ -120,28 +132,34 @@ Respond in this exact JSON format:
 
     const curated = JSON.parse(jsonMatch[0])
 
-    // Write to Supabase
-    const articlesToInsert = curated.articles.map((article: {
-      title: string
-      summary: string
-      source_url: string
-      source_name: string
-      valence: number
-      arousal: number
-      dominance: number
-    }, index: number) => ({
-      title: article.title,
-      summary: article.summary,
-      source_url: article.source_url,
-      source_name: article.source_name,
-      category: categorize(article.title, article.summary),
-      status: 'pending',
-      featured: index === 0,
-      published_at: new Date().toISOString(),
-      valence: article.valence,
-      arousal: article.arousal,
-      dominance: article.dominance,
-    }))
+    // Final deduplication check before insert
+    const articlesToInsert = curated.articles
+      .filter((article: { source_url: string }) => !existingUrls.has(article.source_url))
+      .map((article: {
+        title: string
+        summary: string
+        source_url: string
+        source_name: string
+        valence: number
+        arousal: number
+        dominance: number
+      }, index: number) => ({
+        title: article.title,
+        summary: article.summary,
+        source_url: article.source_url,
+        source_name: article.source_name,
+        category: categorize(article.title, article.summary),
+        status: 'pending',
+        featured: index === 0,
+        published_at: new Date().toISOString(),
+        valence: article.valence,
+        arousal: article.arousal,
+        dominance: article.dominance,
+      }))
+
+    if (articlesToInsert.length === 0) {
+      return NextResponse.json({ success: true, inserted: 0, message: 'All articles already exist' })
+    }
 
     const { data, error } = await supabase
       .from('articles')

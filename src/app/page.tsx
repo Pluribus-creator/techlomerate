@@ -55,7 +55,7 @@ export default async function Home() {
         style={{
           display: "block",
           position: "sticky",
-          top: 0,
+          top: "58px",
           zIndex: 100,
           borderBottom: "0.5px solid var(--border-teal)",
           textDecoration: "none",

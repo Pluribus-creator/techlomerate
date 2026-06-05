@@ -44,34 +44,33 @@ export default async function Home() {
         }}>{today}</span>
       </nav>
 
-      <div style={{
-        background: "var(--teal-50)",
-        borderBottom: "0.5px solid var(--border-teal)",
-        height: "82px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative",
-      }}>
-        <div style={{
-          position: "absolute", top: 0, left: 0,
-          background: "var(--teal-100)", color: "var(--teal-600)",
-          fontSize: "11px", fontWeight: 500,
-          padding: "3px 8px", letterSpacing: "0.06em",
-        }}>AD</div>
-        <div style={{
-          position: "absolute", top: 0, right: 0,
-          background: "var(--teal-100)", color: "var(--teal-600)",
-          fontSize: "11px", fontWeight: 500,
-          padding: "3px 8px", letterSpacing: "0.06em",
-        }}>AD</div>
-        <span style={{
-          color: "var(--text-tertiary)",
-          fontSize: "12px",
-          letterSpacing: "0.08em",
-          fontStyle: "italic",
-        }}>patron · this space intentional</span>
-      </div>
+      <a
+        href="https://www.apple.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          display: "block",
+          position: "sticky",
+          top: 0,
+          zIndex: 100,
+          borderBottom: "0.5px solid var(--border-teal)",
+          textDecoration: "none",
+        }}
+      >
+        <div style={{ position: "absolute", top: 0, left: 0, background: "rgba(0,0,0,0.5)", color: "#fff", fontSize: "11px", fontWeight: 500, padding: "3px 8px", letterSpacing: "0.06em", zIndex: 2 }}>AD</div>
+        <div style={{ position: "absolute", top: 0, right: 0, background: "rgba(0,0,0,0.5)", color: "#fff", fontSize: "11px", fontWeight: 500, padding: "3px 8px", letterSpacing: "0.06em", zIndex: 2 }}>AD</div>
+        <img
+          src="/assets/applebannerad.png"
+          alt="Apple"
+          style={{
+            width: "100%",
+            height: "120px",
+            objectFit: "cover",
+            objectPosition: "center",
+            display: "block",
+          }}
+        />
+      </a>
 
       <div style={{
         maxWidth: "780px",
@@ -172,4 +171,4 @@ export default async function Home() {
       </div>
     </main>
   )
-} 
+}

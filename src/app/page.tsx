@@ -30,6 +30,10 @@ export default async function Home() {
         justifyContent: "space-between",
         padding: "18px 40px",
         borderBottom: "0.5px solid var(--border-teal)",
+        position: "sticky",
+        top: 0,
+        zIndex: 99,
+        background: "var(--bg)",
       }}>
         <span style={{
           fontFamily: "var(--font-serif)",

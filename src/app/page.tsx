@@ -149,7 +149,7 @@ export default async function Home() {
 
           <div style={{ borderTop: "0.5px solid var(--border)", marginBottom: "36px" }} />
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
             {secondary?.map(article => (
               <article key={article.id}>
                 <div style={{

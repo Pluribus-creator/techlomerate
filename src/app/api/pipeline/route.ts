@@ -33,15 +33,6 @@ const FEEDS = [
   'https://restofworld.org/feed/',
 ]
 
-function categorize(title: string, content: string): string {
-  const text = (title + ' ' + content).toLowerCase()
-  if (text.includes('research') || text.includes('paper') || text.includes('study') || text.includes('arxiv')) return 'Research'
-  if (text.includes('policy') || text.includes('regulation') || text.includes('government') || text.includes('law')) return 'Policy'
-  if (text.includes('safety') || text.includes('alignment') || text.includes('risk')) return 'Safety'
-  if (text.includes('startup') || text.includes('funding') || text.includes('raised') || text.includes('acquisition')) return 'Industry'
-  return 'AI'
-}
-
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const secret = searchParams.get('secret')
@@ -51,7 +42,6 @@ export async function GET(request: Request) {
   }
 
   try {
-    // Fetch existing URLs from database to deduplicate
     const { data: existingArticles } = await supabase
       .from('articles')
       .select('source_url')
@@ -60,7 +50,6 @@ export async function GET(request: Request) {
       (existingArticles || []).map(a => a.source_url).filter(Boolean)
     )
 
-    // Fetch articles from RSS feeds
     const allItems: { title: string; link: string; sourceName: string; content: string }[] = []
 
     for (const feedUrl of FEEDS) {
@@ -79,14 +68,12 @@ export async function GET(request: Request) {
       }
     }
 
-    // Filter out already-seen URLs
     const newItems = allItems.filter(item => item.link && !existingUrls.has(item.link))
 
     if (newItems.length === 0) {
       return NextResponse.json({ success: true, inserted: 0, message: 'No new articles found' })
     }
 
-    // Ask Claude to curate and summarize
     const articleList = newItems
       .map((item, i) => `${i + 1}. ${item.title}\nSource: ${item.sourceName}\nURL: ${item.link}\nSnippet: ${item.content}`)
       .join('\n\n')
@@ -102,7 +89,19 @@ Here are today's candidate articles:
 
 ${articleList}
 
-Select the 6 most significant articles. For each, write a 2-3 sentence summary in Techlomerate's voice: clear, honest, no breathlessness, no hype. Then estimate VAD scores (valence -1 to 1, arousal 0 to 1, dominance 0 to 1) based on the emotional and semantic content.
+Select the 6 most significant articles. For each:
+1. Write a 2-3 sentence summary in Techlomerate's voice: clear, honest, no breathlessness, no hype
+2. Assign a category from exactly these options: Research, Policy, Safety, Industry, AI, Ethics, Science
+3. Estimate VAD scores (valence -1 to 1, arousal 0 to 1, dominance 0 to 1)
+
+Category guidance:
+- Research: academic papers, studies, new findings, arxiv
+- Policy: regulation, government, law, governance, treaties
+- Safety: AI safety, alignment, existential risk, misuse
+- Industry: funding, startups, acquisitions, business strategy, earnings
+- Ethics: bias, fairness, privacy, social impact, labor displacement
+- Science: breakthroughs, technical advances, new capabilities
+- AI: general AI news that doesn't fit the above
 
 Respond in this exact JSON format:
 {
@@ -112,6 +111,7 @@ Respond in this exact JSON format:
       "summary": "your 2-3 sentence summary",
       "source_url": "exact url",
       "source_name": "source name",
+      "category": "one of the categories above",
       "valence": 0.0,
       "arousal": 0.0,
       "dominance": 0.0
@@ -132,7 +132,6 @@ Respond in this exact JSON format:
 
     const curated = JSON.parse(jsonMatch[0])
 
-    // Final deduplication check before insert
     const articlesToInsert = curated.articles
       .filter((article: { source_url: string }) => !existingUrls.has(article.source_url))
       .map((article: {
@@ -140,6 +139,7 @@ Respond in this exact JSON format:
         summary: string
         source_url: string
         source_name: string
+        category: string
         valence: number
         arousal: number
         dominance: number
@@ -148,7 +148,7 @@ Respond in this exact JSON format:
         summary: article.summary,
         source_url: article.source_url,
         source_name: article.source_name,
-        category: categorize(article.title, article.summary),
+        category: article.category,
         status: 'pending',
         featured: index === 0,
         published_at: new Date().toISOString(),

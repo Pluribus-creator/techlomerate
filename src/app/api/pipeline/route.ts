@@ -29,8 +29,20 @@ const FEEDS = [
   'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml',
   'https://feeds.a.dj.com/rss/RSSWSJD.xml',
   'https://spectrum.ieee.org/feeds/feed.rss',
-  'https://www.thenationalnews.com/rss/technology',
   'https://restofworld.org/feed/',
+  'https://arxiv.org/rss/cs.AI',
+  'https://arxiv.org/rss/cs.LG',
+  'https://huggingface.co/blog/feed.xml',
+  'https://ai.meta.com/blog/rss/',
+  'https://blogs.microsoft.com/ai/feed/',
+  'https://research.google/blog/rss/',
+  'https://www.marktechpost.com/feed/',
+  'https://arstechnica.com/tag/ai/feed/',
+  'https://www.theguardian.com/technology/rss',
+  'https://towardsdatascience.com/feed',
+  'https://futureoflife.org/feed/',
+  'https://paperswithcode.com/rss',
+  'https://asia.nikkei.com/rss/feed/nar',
 ]
 
 export async function GET(request: Request) {
@@ -56,7 +68,7 @@ export async function GET(request: Request) {
       try {
         const feed = await parser.parseURL(feedUrl)
         const sourceName = feed.title || feedUrl
-        const items = (feed.items || []).slice(0, 8).map(item => ({
+        const items = (feed.items || []).slice(0, 6).map(item => ({
           title: item.title || '',
           link: item.link || '',
           sourceName,
@@ -89,9 +101,9 @@ Here are today's candidate articles:
 
 ${articleList}
 
-Select the 6 most significant articles. For each:
+Select the 6 most significant articles. Prioritise genuine news, research breakthroughs, and policy developments over tutorials, listicles, and promotional content. For each:
 1. Write a 2-3 sentence summary in Techlomerate's voice: clear, honest, no breathlessness, no hype
-2. Assign a category from exactly these options: Research, Policy, Safety, Industry, AI, Ethics, Science
+2. Assign a category from exactly these options: Research, Policy, Safety, Industry, Ethics, Science
 3. Estimate VAD scores (valence -1 to 1, arousal 0 to 1, dominance 0 to 1)
 
 Category guidance:

@@ -31,11 +31,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       url: `https://techlomerate.news/articles/${slug}`,
       siteName: 'Techlomerate',
       publishedTime: article.published_at,
+      images: article.image_url ? [{ url: article.image_url }] : [],
     },
     twitter: {
       card: 'summary_large_image',
       title: article.title,
       description: article.summary,
+      images: article.image_url ? [article.image_url] : [],
     },
   }
 }
@@ -65,6 +67,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     "@type": "NewsArticle",
     "headline": article.title,
     "description": article.summary,
+    "image": article.image_url || undefined,
     "datePublished": article.published_at,
     "dateModified": article.published_at,
     "author": {
@@ -111,9 +114,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 500,
           letterSpacing: "0.03em", color: "var(--fg)", textDecoration: "none",
         }}>Techlomerate (tek-lom-uh-RAH-tee)</a>
-        <span style={{ fontSize: "12px", color: "var(--text-tertiary)", letterSpacing: "0.05em" }}>
-          {publishedDate}
-        </span>
+        <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+          <a href="/about" style={{ fontSize: "12px", color: "var(--text-tertiary)", textDecoration: "none", letterSpacing: "0.04em" }}>About</a>
+          <span style={{ fontSize: "12px", color: "var(--text-tertiary)", letterSpacing: "0.05em" }}>{publishedDate}</span>
+        </div>
       </nav>
 
       <a href="https://www.apple.com" target="_blank" rel="noopener noreferrer" style={{
@@ -139,6 +143,24 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         }} />
 
         <div style={{ position: "relative", zIndex: 1 }}>
+
+          {article.image_url && (
+            <div style={{ marginBottom: "36px" }}>
+              <img
+                src={article.image_url}
+                alt={article.title}
+                style={{
+                  width: "100%",
+                  height: "420px",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  borderRadius: "4px",
+                  display: "block",
+                }}
+              />
+            </div>
+          )}
+
           <div style={{ marginBottom: "48px" }}>
             <div style={{
               fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,

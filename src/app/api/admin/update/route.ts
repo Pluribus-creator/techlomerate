@@ -20,6 +20,13 @@ export async function POST(request: Request) {
   const status = formData.get('status') as string
   const featured = formData.get('featured') === 'true'
 
+  if (featured) {
+    await adminSupabase
+      .from('articles')
+      .update({ featured: false })
+      .eq('featured', true)
+  }
+
   const { error } = await adminSupabase
     .from('articles')
     .update({ status, featured })

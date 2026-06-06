@@ -10,7 +10,7 @@ const adminSupabase = createClient(
 export default async function AdminPage({
   searchParams,
 }: {
-  searchParams: Promise<{ auth?: string }>
+  searchParams: Promise<{ auth?: string; success?: string; error?: string }>
 }) {
   const resolvedParams = await searchParams
   const cookieStore = await cookies()
@@ -30,29 +30,9 @@ export default async function AdminPage({
             name="password"
             type="password"
             placeholder="Password"
-            style={{
-              padding: '10px 14px',
-              border: '0.5px solid var(--border-teal)',
-              borderRadius: '6px',
-              background: 'var(--bg)',
-              fontSize: '14px',
-              color: 'var(--fg)',
-              outline: 'none',
-            }}
+            style={{ padding: '10px 14px', border: '0.5px solid var(--border-teal)', borderRadius: '6px', background: 'var(--bg)', fontSize: '14px', color: 'var(--fg)', outline: 'none' }}
           />
-          <button
-            type="submit"
-            style={{
-              padding: '10px 14px',
-              background: 'var(--teal-600)',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '6px',
-              fontSize: '14px',
-              cursor: 'pointer',
-              fontFamily: 'var(--font-sans)',
-            }}
-          >
+          <button type="submit" style={{ padding: '10px 14px', background: 'var(--teal-600)', color: '#fff', border: 'none', borderRadius: '6px', fontSize: '14px', cursor: 'pointer' }}>
             Enter
           </button>
         </form>
@@ -77,47 +57,63 @@ export default async function AdminPage({
     <main style={{ minHeight: '100vh', background: 'var(--bg)', padding: '40px' }}>
       <div style={{ maxWidth: '860px', margin: '0 auto' }}>
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '40px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px' }}>
           <div>
             <div style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', marginBottom: '4px' }}>Editorial gate</div>
             <div style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>
               {pending?.length || 0} pending · {approved?.length || 0} recently approved
             </div>
           </div>
-          <a href="/" style={{ fontSize: '12px', color: 'var(--teal-600)', textDecoration: 'none' }}>
-            View site →
-          </a>
+          <a href="/" style={{ fontSize: '12px', color: 'var(--teal-600)', textDecoration: 'none' }}>View site →</a>
+        </div>
+
+        <div style={{ marginBottom: '40px', border: '0.5px solid var(--border-teal)', borderRadius: '8px', padding: '20px', background: 'var(--bg)' }}>
+          <div style={{ fontSize: '11px', color: 'var(--teal-600)', fontWeight: 500, letterSpacing: '0.06em', marginBottom: '12px' }}>ADD ARTICLE BY URL</div>
+          {resolvedParams.success === 'added' && (
+            <div style={{ fontSize: '12px', color: 'var(--teal-600)', marginBottom: '12px', padding: '8px 12px', background: 'var(--teal-50)', borderRadius: '6px' }}>
+              Article added and published.
+            </div>
+          )}
+          {resolvedParams.error && (
+            <div style={{ fontSize: '12px', color: '#c0392b', marginBottom: '12px', padding: '8px 12px', background: '#fdf0ed', borderRadius: '6px' }}>
+              {resolvedParams.error === 'exists' ? 'That URL is already in the database.' :
+               resolvedParams.error === 'fetch' ? 'Could not fetch that URL. Try another.' :
+               resolvedParams.error === 'parse' ? 'Could not parse the article. Try another.' :
+               'Something went wrong. Try again.'}
+            </div>
+          )}
+          <form action="/api/admin/add-url" method="POST" style={{ display: 'flex', gap: '10px' }}>
+            <input
+              name="url"
+              type="url"
+              placeholder="https://..."
+              required
+              style={{ flex: 1, padding: '10px 14px', border: '0.5px solid var(--border-teal)', borderRadius: '6px', background: 'var(--bg)', fontSize: '13px', color: 'var(--fg)', outline: 'none' }}
+            />
+            <button type="submit" style={{ padding: '10px 20px', background: 'var(--teal-600)', color: '#fff', border: 'none', borderRadius: '6px', fontSize: '13px', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+              Add + publish
+            </button>
+          </form>
+          <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginTop: '8px' }}>
+            Claude reads the article, writes the summary, scores VAD, and publishes directly.
+          </div>
         </div>
 
         {pending && pending.length > 0 && (
           <section style={{ marginBottom: '48px' }}>
-            <div style={{ fontSize: '11px', color: 'var(--teal-600)', fontWeight: 500, letterSpacing: '0.06em', marginBottom: '16px' }}>
-              PENDING REVIEW
-            </div>
+            <div style={{ fontSize: '11px', color: 'var(--teal-600)', fontWeight: 500, letterSpacing: '0.06em', marginBottom: '16px' }}>PENDING REVIEW</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {pending.map((article) => (
-                <div key={article.id} style={{
-                  border: '0.5px solid var(--border-teal)',
-                  borderRadius: '8px',
-                  padding: '18px 20px',
-                  background: 'var(--teal-50)',
-                }}>
+                <div key={article.id} style={{ border: '0.5px solid var(--border-teal)', borderRadius: '8px', padding: '18px 20px', background: 'var(--teal-50)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px' }}>
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px', flexWrap: 'wrap' }}>
-                        <span style={{ fontSize: '11px', color: 'var(--teal-600)', fontWeight: 500 }}>
-                          {article.category}
-                        </span>
-                        <a
-                          href={article.source_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ fontSize: '11px', color: 'var(--teal-400)', textDecoration: 'none', letterSpacing: '0.02em' }}
-                        >
+                        <span style={{ fontSize: '11px', color: 'var(--teal-600)', fontWeight: 500 }}>{article.category}</span>
+                        <a href={article.source_url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', color: 'var(--teal-400)', textDecoration: 'none' }}>
                           {article.source_name} ↗
                         </a>
                         {article.valence !== null && (
-                          <span style={{ fontSize: '11px', color: 'var(--text-tertiary)', fontWeight: 400 }}>
+                          <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>
                             V:{article.valence?.toFixed(1)} A:{article.arousal?.toFixed(1)} D:{article.dominance?.toFixed(1)}
                           </span>
                         )}
@@ -125,40 +121,27 @@ export default async function AdminPage({
                           {new Date(article.published_at).toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' })}
                         </span>
                       </div>
-                      <div style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', fontWeight: 500, marginBottom: '8px', lineHeight: 1.3 }}>
-                        {article.title}
-                      </div>
-                      <div style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                        {article.summary}
-                      </div>
+                      <div style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', fontWeight: 500, marginBottom: '8px', lineHeight: 1.3 }}>{article.title}</div>
+                      <div style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{article.summary}</div>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flexShrink: 0 }}>
                       <form action="/api/admin/update" method="POST">
                         <input type="hidden" name="id" value={article.id} />
                         <input type="hidden" name="status" value="approved" />
                         <input type="hidden" name="featured" value="false" />
-                        <button type="submit" style={{
-                          padding: '7px 16px', background: 'var(--teal-600)', color: '#fff',
-                          border: 'none', borderRadius: '6px', fontSize: '12px', cursor: 'pointer', width: '100%',
-                        }}>Approve</button>
+                        <button type="submit" style={{ padding: '7px 16px', background: 'var(--teal-600)', color: '#fff', border: 'none', borderRadius: '6px', fontSize: '12px', cursor: 'pointer', width: '100%' }}>Approve</button>
                       </form>
                       <form action="/api/admin/update" method="POST">
                         <input type="hidden" name="id" value={article.id} />
                         <input type="hidden" name="status" value="approved" />
                         <input type="hidden" name="featured" value="true" />
-                        <button type="submit" style={{
-                          padding: '7px 16px', background: 'var(--teal-400)', color: '#fff',
-                          border: 'none', borderRadius: '6px', fontSize: '12px', cursor: 'pointer', width: '100%',
-                        }}>Feature</button>
+                        <button type="submit" style={{ padding: '7px 16px', background: 'var(--teal-400)', color: '#fff', border: 'none', borderRadius: '6px', fontSize: '12px', cursor: 'pointer', width: '100%' }}>Feature</button>
                       </form>
                       <form action="/api/admin/update" method="POST">
                         <input type="hidden" name="id" value={article.id} />
                         <input type="hidden" name="status" value="rejected" />
                         <input type="hidden" name="featured" value="false" />
-                        <button type="submit" style={{
-                          padding: '7px 16px', background: 'transparent', color: 'var(--text-tertiary)',
-                          border: '0.5px solid var(--border)', borderRadius: '6px', fontSize: '12px', cursor: 'pointer', width: '100%',
-                        }}>Reject</button>
+                        <button type="submit" style={{ padding: '7px 16px', background: 'transparent', color: 'var(--text-tertiary)', border: '0.5px solid var(--border)', borderRadius: '6px', fontSize: '12px', cursor: 'pointer', width: '100%' }}>Reject</button>
                       </form>
                     </div>
                   </div>
@@ -170,33 +153,16 @@ export default async function AdminPage({
 
         {approved && approved.length > 0 && (
           <section>
-            <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', fontWeight: 500, letterSpacing: '0.06em', marginBottom: '16px' }}>
-              RECENTLY APPROVED
-            </div>
+            <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', fontWeight: 500, letterSpacing: '0.06em', marginBottom: '16px' }}>RECENTLY APPROVED</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {approved.map((article) => (
-                <div key={article.id} style={{
-                  border: '0.5px solid var(--border)',
-                  borderRadius: '8px',
-                  padding: '14px 20px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  gap: '16px',
-                }}>
+                <div key={article.id} style={{ border: '0.5px solid var(--border)', borderRadius: '8px', padding: '14px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
                       <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>{article.category}</span>
                       <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>·</span>
                       <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>{article.featured ? 'Featured' : 'Standard'}</span>
-                      <a
-                        href={article.source_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ fontSize: '11px', color: 'var(--teal-400)', textDecoration: 'none' }}
-                      >
-                        {article.source_name} ↗
-                      </a>
+                      <a href={article.source_url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', color: 'var(--teal-400)', textDecoration: 'none' }}>{article.source_name} ↗</a>
                     </div>
                     <div style={{ fontSize: '14px', fontFamily: 'var(--font-serif)' }}>{article.title}</div>
                   </div>
@@ -208,13 +174,10 @@ export default async function AdminPage({
         )}
 
         {(!pending || pending.length === 0) && (
-          <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--text-tertiary)', fontSize: '14px' }}>
-            Queue is clear. Run the pipeline to fetch new articles.
-            <div style={{ marginTop: '16px' }}>
-              <a
-                href={`/api/pipeline?secret=${process.env.PIPELINE_SECRET}`}
-                style={{ fontSize: '12px', color: 'var(--teal-600)', textDecoration: 'none' }}
-              >
+          <div style={{ textAlign: 'center', padding: '40px 0', color: 'var(--text-tertiary)', fontSize: '14px' }}>
+            Queue is clear.
+            <div style={{ marginTop: '12px' }}>
+              <a href={`/api/pipeline?secret=${process.env.PIPELINE_SECRET}`} style={{ fontSize: '12px', color: 'var(--teal-600)', textDecoration: 'none' }}>
                 Run pipeline →
               </a>
             </div>

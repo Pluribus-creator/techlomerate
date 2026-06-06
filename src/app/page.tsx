@@ -54,7 +54,7 @@ export default async function Home() {
         <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
           <a href="/about" style={{ fontSize: "12px", color: "var(--text-tertiary)", textDecoration: "none", letterSpacing: "0.04em" }}>About</a>
           <span style={{ fontSize: "12px", color: "var(--text-tertiary)", letterSpacing: "0.05em" }}>{today}</span>
-      </div>
+        </div>
       </nav>
 
       <a
@@ -113,6 +113,24 @@ export default async function Home() {
 
           {featured && (
             <article style={{ marginBottom: "48px" }}>
+              {featured.image_url && (
+                <div style={{ marginBottom: "24px" }}>
+                  <a href={`/articles/${slugify(featured.title)}`}>
+                    <img
+                      src={featured.image_url}
+                      alt={featured.title}
+                      style={{
+                        width: "100%",
+                        height: "420px",
+                        objectFit: "cover",
+                        objectPosition: "center",
+                        borderRadius: "4px",
+                        display: "block",
+                      }}
+                    />
+                  </a>
+                </div>
+              )}
               <div style={{
                 fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,
                 letterSpacing: "0.06em", marginBottom: "14px",
@@ -152,14 +170,32 @@ export default async function Home() {
           <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
             {secondary?.map(article => (
               <article key={article.id}>
+                {article.image_url && (
+                  <div style={{ marginBottom: "16px" }}>
+                    <a href={`/articles/${slugify(article.title)}`}>
+                      <img
+                        src={article.image_url}
+                        alt={article.title}
+                        style={{
+                          width: "100%",
+                          height: "220px",
+                          objectFit: "cover",
+                          objectPosition: "center",
+                          borderRadius: "4px",
+                          display: "block",
+                        }}
+                      />
+                    </a>
+                  </div>
+                )}
                 <div style={{
                   fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,
                   letterSpacing: "0.06em", marginBottom: "10px",
                 }}>{article.category}</div>
                 <h2 style={{
                   fontFamily: "var(--font-serif)",
-                  fontSize: "17px", fontWeight: 500,
-                  lineHeight: 1.4, marginBottom: "8px",
+                  fontSize: "22px", fontWeight: 500,
+                  lineHeight: 1.35, marginBottom: "10px",
                 }}>
                   <a
                     href={`/articles/${slugify(article.title)}`}
@@ -168,7 +204,7 @@ export default async function Home() {
                     {article.title}
                   </a>
                 </h2>
-                <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.75, marginBottom: "10px" }}>
+                <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.75, marginBottom: "10px" }}>
                   {article.summary}
                 </p>
                 <a

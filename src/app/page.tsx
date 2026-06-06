@@ -2,6 +2,16 @@ import { supabase } from '@/lib/supabase'
 
 export const revalidate = 60
 
+function slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim()
+    .slice(0, 80)
+}
+
 export default async function Home() {
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
@@ -20,7 +30,7 @@ export default async function Home() {
   const secondary = articles?.filter(a => !a.featured).slice(0, 10)
 
   return (
-    <main style={{ minHeight: "100vh", background: "var(--bg)" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg)", overflow: "clip" }}>
 
       <div style={{ height: "2px", background: "var(--teal-400)" }} />
 
@@ -30,6 +40,10 @@ export default async function Home() {
         justifyContent: "space-between",
         padding: "18px 40px",
         borderBottom: "0.5px solid var(--border-teal)",
+        position: "sticky",
+        top: 0,
+        zIndex: 99,
+        background: "var(--bg)",
       }}>
         <span style={{
           fontFamily: "var(--font-serif)",
@@ -51,14 +65,24 @@ export default async function Home() {
         style={{
           display: "block",
           position: "sticky",
-          top: 0,
+          top: "58px",
           zIndex: 100,
           borderBottom: "0.5px solid var(--border-teal)",
           textDecoration: "none",
         }}
       >
-        <div style={{ position: "absolute", top: 0, left: 0, background: "rgba(0,0,0,0.5)", color: "#fff", fontSize: "11px", fontWeight: 500, padding: "3px 8px", letterSpacing: "0.06em", zIndex: 2 }}>AD</div>
-        <div style={{ position: "absolute", top: 0, right: 0, background: "rgba(0,0,0,0.5)", color: "#fff", fontSize: "11px", fontWeight: 500, padding: "3px 8px", letterSpacing: "0.06em", zIndex: 2 }}>AD</div>
+        <div style={{
+          position: "absolute", top: 0, left: 0,
+          background: "rgba(0,0,0,0.4)",
+          color: "#fff",
+          fontSize: "11px",
+          fontWeight: 400,
+          padding: "3px 10px",
+          letterSpacing: "0.08em",
+          fontFamily: "var(--font-serif)",
+          fontStyle: "italic",
+          zIndex: 2,
+        }}>broadside</div>
         <img
           src="/assets/applebannerad.png"
           alt="Apple"
@@ -66,7 +90,7 @@ export default async function Home() {
             width: "100%",
             height: "120px",
             objectFit: "cover",
-            objectPosition: "center",
+            objectPosition: "center 30%",
             display: "block",
           }}
         />
@@ -100,9 +124,7 @@ export default async function Home() {
                 lineHeight: 1.25, marginBottom: "18px", maxWidth: "600px",
               }}>
                 <a
-                  href={featured.source_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`/articles/${slugify(featured.title)}`}
                   style={{ color: "inherit", textDecoration: "none", borderBottom: "0.5px solid var(--border)" }}
                 >
                   {featured.title}
@@ -141,9 +163,7 @@ export default async function Home() {
                   lineHeight: 1.4, marginBottom: "8px",
                 }}>
                   <a
-                    href={article.source_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`/articles/${slugify(article.title)}`}
                     style={{ color: "inherit", textDecoration: "none", borderBottom: "0.5px solid var(--border)" }}
                   >
                     {article.title}

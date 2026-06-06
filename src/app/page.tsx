@@ -51,11 +51,10 @@ export default async function Home() {
           fontWeight: 500,
           letterSpacing: "0.03em",
         }}>Techlomerate (tek-lom-uh-RAH-tee)</span>
-        <span style={{
-          fontSize: "12px",
-          color: "var(--text-tertiary)",
-          letterSpacing: "0.05em",
-        }}>{today}</span>
+        <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+          <a href="/about" style={{ fontSize: "12px", color: "var(--text-tertiary)", textDecoration: "none", letterSpacing: "0.04em" }}>About</a>
+          <span style={{ fontSize: "12px", color: "var(--text-tertiary)", letterSpacing: "0.05em" }}>{today}</span>
+      </div>
       </nav>
 
       <a

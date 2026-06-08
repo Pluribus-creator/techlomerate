@@ -40,32 +40,19 @@ export default async function OldMarketPage() {
       <div style={{ height: "2px", background: "var(--teal-400)" }} />
 
       <nav style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "18px 40px",
-        borderBottom: "0.5px solid var(--border-teal)",
-        position: "sticky",
-        top: 0,
-        zIndex: 99,
-        background: "var(--bg)",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "18px 40px", borderBottom: "0.5px solid var(--border-teal)",
+        position: "sticky", top: 0, zIndex: 99, background: "var(--bg)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
           <a href="/" style={{
-            fontFamily: "var(--font-serif)",
-            fontSize: "20px",
-            fontWeight: 500,
-            letterSpacing: "0.03em",
-            color: "var(--fg)",
-            textDecoration: "none",
+            fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 500,
+            letterSpacing: "0.03em", color: "var(--fg)", textDecoration: "none",
           }}>Techlomerate</a>
           <span style={{ color: "var(--text-tertiary)", fontSize: "16px" }}>·</span>
           <span style={{
-            fontFamily: "var(--font-serif)",
-            fontSize: "18px",
-            fontWeight: 500,
-            color: "var(--teal-600)",
-            letterSpacing: "0.03em",
+            fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500,
+            color: "var(--teal-600)", letterSpacing: "0.03em",
           }}>The Old Market</span>
         </div>
         <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
@@ -74,25 +61,14 @@ export default async function OldMarketPage() {
         </div>
       </nav>
 
-      <a
-        href="https://www.apple.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          display: "block",
-          position: "sticky",
-          top: "58px",
-          zIndex: 100,
-          borderBottom: "0.5px solid var(--border-teal)",
-          textDecoration: "none",
-        }}
-      >
+      <a href="https://www.apple.com" target="_blank" rel="noopener noreferrer" style={{
+        display: "block", position: "sticky", top: "58px", zIndex: 100,
+        borderBottom: "0.5px solid var(--border-teal)", textDecoration: "none",
+      }}>
         <div style={{
-          position: "absolute", top: 0, left: 0,
-          background: "rgba(0,0,0,0.4)", color: "#fff",
-          fontSize: "11px", fontWeight: 400, padding: "3px 10px",
-          letterSpacing: "0.08em", fontFamily: "var(--font-serif)",
-          fontStyle: "italic", zIndex: 2,
+          position: "absolute", top: 0, left: 0, background: "rgba(0,0,0,0.4)",
+          color: "#fff", fontSize: "11px", fontWeight: 400, padding: "3px 10px",
+          letterSpacing: "0.08em", fontFamily: "var(--font-serif)", fontStyle: "italic", zIndex: 2,
         }}>broadside</div>
         <img src="/assets/applebannerad.png" alt="Apple" style={{
           width: "100%", height: "120px", objectFit: "cover",
@@ -100,36 +76,21 @@ export default async function OldMarketPage() {
         }} />
       </a>
 
-      <div style={{
-        maxWidth: "780px",
-        margin: "0 auto",
-        padding: "40px 40px 24px",
-      }}>
+      <div style={{ maxWidth: "780px", margin: "0 auto", padding: "40px 40px 24px" }}>
         <div style={{
-          fontSize: "12px",
-          color: "var(--text-tertiary)",
-          lineHeight: 1.6,
-          padding: "16px 20px",
-          borderLeft: "2px solid var(--teal-400)",
-          marginBottom: "40px",
+          fontSize: "12px", color: "var(--text-tertiary)", lineHeight: 1.6,
+          padding: "16px 20px", borderLeft: "2px solid var(--teal-400)", marginBottom: "40px",
         }}>
           Patient capital. Long time horizons. Honest analysis of AI and technology markets.
           Editor positions are disclosed where relevant. This is not financial advice.
         </div>
       </div>
 
-      <div style={{
-        maxWidth: "780px",
-        margin: "0 auto",
-        padding: "0 40px 80px",
-        position: "relative",
-      }}>
+      <div style={{ maxWidth: "780px", margin: "0 auto", padding: "0 40px 80px", position: "relative" }}>
         <div style={{
-          position: "absolute",
-          inset: 0,
+          position: "absolute", inset: 0,
           backgroundImage: "repeating-linear-gradient(to bottom, transparent, transparent 23px, rgba(29, 158, 117, 0.04) 23px, rgba(29, 158, 117, 0.04) 24px)",
-          pointerEvents: "none",
-          zIndex: 0,
+          pointerEvents: "none", zIndex: 0,
         }} />
 
         <div style={{ position: "relative", zIndex: 1 }}>
@@ -145,21 +106,19 @@ export default async function OldMarketPage() {
                 </div>
               )}
               <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
-                <div style={{
-                  fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,
-                  letterSpacing: "0.06em",
-                }}>{featured.category}</div>
+                <div style={{ fontSize: "11px", color: "var(--teal-600)", fontWeight: 500, letterSpacing: "0.06em" }}>
+                  {featured.category}
+                </div>
                 {featured.ticker && (
                   <div style={{
-                    fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,
-                    letterSpacing: "0.06em", background: "var(--teal-50)",
-                    padding: "2px 8px", borderRadius: "4px",
+                    fontSize: "11px", fontWeight: 600, letterSpacing: "0.06em",
+                    padding: "2px 8px", borderRadius: "4px", color: "#fff",
+                    background: "linear-gradient(90deg, #FF6B6B, #FFB347, #FFD700, #5BC8F5, #9B59B6)",
                   }}>{featured.ticker}</div>
                 )}
               </div>
               <h1 style={{
-                fontFamily: "var(--font-serif)",
-                fontSize: "34px", fontWeight: 500,
+                fontFamily: "var(--font-serif)", fontSize: "34px", fontWeight: 500,
                 lineHeight: 1.25, marginBottom: "18px", maxWidth: "600px",
               }}>
                 <a href={featured.source_url} target="_blank" rel="noopener noreferrer"
@@ -198,21 +157,19 @@ export default async function OldMarketPage() {
                   </div>
                 )}
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
-                  <div style={{
-                    fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,
-                    letterSpacing: "0.06em",
-                  }}>{article.category}</div>
+                  <div style={{ fontSize: "11px", color: "var(--teal-600)", fontWeight: 500, letterSpacing: "0.06em" }}>
+                    {article.category}
+                  </div>
                   {article.ticker && (
                     <div style={{
-                      fontSize: "11px", color: "var(--teal-600)", fontWeight: 500,
-                      letterSpacing: "0.06em", background: "var(--teal-50)",
-                      padding: "2px 8px", borderRadius: "4px",
+                      fontSize: "11px", fontWeight: 600, letterSpacing: "0.06em",
+                      padding: "2px 8px", borderRadius: "4px", color: "#fff",
+                      background: "linear-gradient(90deg, #FF6B6B, #FFB347, #FFD700, #5BC8F5, #9B59B6)",
                     }}>{article.ticker}</div>
                   )}
                 </div>
                 <h2 style={{
-                  fontFamily: "var(--font-serif)",
-                  fontSize: "22px", fontWeight: 500,
+                  fontFamily: "var(--font-serif)", fontSize: "22px", fontWeight: 500,
                   lineHeight: 1.35, marginBottom: "10px",
                 }}>
                   <a href={article.source_url} target="_blank" rel="noopener noreferrer"

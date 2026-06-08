@@ -19,16 +19,20 @@ export async function POST(request: Request) {
   const id = formData.get('id') as string
   const status = formData.get('status') as string
   const featured = formData.get('featured') === 'true'
+  const table = (formData.get('table') as string) || 'articles'
+
+  const validTables = ['articles', 'apple_articles', 'market_articles']
+  const targetTable = validTables.includes(table) ? table : 'articles'
 
   if (featured) {
     await adminSupabase
-      .from('articles')
+      .from(targetTable)
       .update({ featured: false })
       .eq('featured', true)
   }
 
   const { error } = await adminSupabase
-    .from('articles')
+    .from(targetTable)
     .update({ status, featured })
     .eq('id', id)
 

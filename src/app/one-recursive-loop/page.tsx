@@ -72,11 +72,7 @@ export default async function OneRecursiveLoopPage() {
         display: "block", position: "relative",
         borderBottom: "0.5px solid var(--border-teal)", textDecoration: "none",
       }}>
-        <div style={{
-          position: "absolute", top: 0, left: 0, background: "rgba(0,0,0,0.4)",
-          color: "#fff", fontSize: "11px", fontWeight: 400, padding: "3px 10px",
-          letterSpacing: "0.08em", fontFamily: "var(--font-serif)", fontStyle: "italic", zIndex: 2,
-        }}>broadside</div>
+        
         <img src="/assets/applemothershipad.png" alt="Apple" style={{
           width: "100%", height: "280px", objectFit: "cover",
           objectPosition: "center 60%", display: "block",

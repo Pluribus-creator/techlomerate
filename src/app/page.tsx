@@ -89,8 +89,8 @@ export default async function Home() {
           fontStyle: "italic", zIndex: 2,
         }}>broadside</div>
         <img src="/assets/applemothershipad.png" alt="Apple" style={{
-          width: "100%", height: "200px", objectFit: "cover",
-          objectPosition: "center 30%", display: "block",
+          width: "100%", height: "280px", objectFit: "cover",
+          objectPosition: "center 60%", display: "block",
         }} />
       </a>
 

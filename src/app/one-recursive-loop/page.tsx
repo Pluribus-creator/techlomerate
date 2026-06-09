@@ -78,8 +78,8 @@ export default async function OneRecursiveLoopPage() {
           letterSpacing: "0.08em", fontFamily: "var(--font-serif)", fontStyle: "italic", zIndex: 2,
         }}>broadside</div>
         <img src="/assets/applemothershipad.png" alt="Apple" style={{
-          width: "100%", height: "200px", objectFit: "cover",
-          objectPosition: "center 30%", display: "block",
+          width: "100%", height: "280px", objectFit: "cover",
+          objectPosition: "center 60%", display: "block",
         }} />
       </a>
 
@@ -90,8 +90,7 @@ export default async function OneRecursiveLoopPage() {
           borderImage: "linear-gradient(90deg, #FF6B6B, #FFB347, #FFD700, #5BC8F5, #9B59B6) 1",
           marginBottom: "40px",
         }}>
-          Apple coverage for people who think carefully about the relationship between humans and their tools.
-          One Recursive Loop — because the company that built the computer keeps building computers that build computers.
+          Apple coverage by design. One Recursive Loop is a newsletter about Apple and its ecosystem, published every weekday. 
         </div>
       </div>
 

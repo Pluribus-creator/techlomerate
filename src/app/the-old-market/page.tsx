@@ -71,8 +71,8 @@ export default async function OldMarketPage() {
           letterSpacing: "0.08em", fontFamily: "var(--font-serif)", fontStyle: "italic", zIndex: 2,
         }}>broadside</div>
         <img src="/assets/applemothershipad.png" alt="Apple" style={{
-          width: "100%", height: "200px", objectFit: "cover",
-          objectPosition: "center 30%", display: "block",
+          width: "100%", height: "280px", objectFit: "cover",
+          objectPosition: "center 60%", display: "block",
         }} />
       </a>
 
@@ -81,8 +81,8 @@ export default async function OldMarketPage() {
           fontSize: "12px", color: "var(--text-tertiary)", lineHeight: 1.6,
           padding: "16px 20px", borderLeft: "2px solid var(--teal-400)", marginBottom: "40px",
         }}>
-          Patient capital. Long time horizons. Honest analysis of AI and technology markets.
-          Editor positions are disclosed where relevant. This is not financial advice.
+          News and analysis of AI and technology markets. Not financial advice. Published every weekday.
+          
         </div>
       </div>
 

@@ -34,19 +34,17 @@ export default async function OneRecursiveLoopPage() {
   const featured = articles?.find(a => a.featured)
   const secondary = articles?.filter(a => !a.featured).slice(0, 99)
 
-  const gumdrop = "linear-gradient(90deg, #F25430, #F5A623, #F8E71C, #7ED321, #4A90E2, #9013FE)"
-
   const rainbowStyle = {
-    background: gumdrop,
-    WebkitBackgroundClip: "text" as const,
-    WebkitTextFillColor: "transparent" as const,
-    backgroundClip: "text" as const,
+    background: "linear-gradient(90deg, #F25430, #F5A623, #F8E71C, #7ED321, #4A90E2, #9013FE)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    backgroundClip: "text",
   }
 
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg)", overflow: "clip" }}>
 
-      <div style={{ height: "2px", background: gumdrop }} />
+      <div style={{ height: "2px", background: "linear-gradient(90deg, #F25430, #F5A623, #F8E71C, #7ED321, #4A90E2, #9013FE)", }} />
 
       <nav style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -79,7 +77,7 @@ export default async function OneRecursiveLoopPage() {
           color: "#fff", fontSize: "11px", fontWeight: 400, padding: "3px 10px",
           letterSpacing: "0.08em", fontFamily: "var(--font-serif)", fontStyle: "italic", zIndex: 2,
         }}>broadside</div>
-        <img src="/assets/applebannerad.png" alt="Apple" style={{
+        <img src="/assets/applemothershipad.png" alt="Apple" style={{
           width: "100%", height: "120px", objectFit: "cover",
           objectPosition: "center 30%", display: "block",
         }} />
@@ -88,8 +86,8 @@ export default async function OneRecursiveLoopPage() {
       <div style={{ maxWidth: "780px", margin: "0 auto", padding: "40px 40px 24px" }}>
         <div style={{
           fontSize: "12px", color: "var(--text-tertiary)", lineHeight: 1.6,
-          padding: "16px 20px", borderLeft: "3px solid transparent",
-          borderImage: `${gumdrop} 1`,
+          padding: "16px 20px", borderLeft: "2px solid transparent",
+          borderImage: "linear-gradient(90deg, #FF6B6B, #FFB347, #FFD700, #5BC8F5, #9B59B6) 1",
           marginBottom: "40px",
         }}>
           Apple coverage for people who think carefully about the relationship between humans and their tools.
@@ -116,7 +114,7 @@ export default async function OneRecursiveLoopPage() {
                   }} />
                 </div>
               )}
-              <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.06em", marginBottom: "14px", ...rainbowStyle }}>
+              <div style={{ fontSize: "11px", fontWeight: 500, letterSpacing: "0.06em", marginBottom: "14px", ...rainbowStyle }}>
                 {featured.category}
               </div>
               <h1 style={{
@@ -158,7 +156,7 @@ export default async function OneRecursiveLoopPage() {
                     }} />
                   </div>
                 )}
-                <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.06em", marginBottom: "10px", ...rainbowStyle }}>
+                <div style={{ fontSize: "11px", fontWeight: 500, letterSpacing: "0.06em", marginBottom: "10px", ...rainbowStyle }}>
                   {article.category}
                 </div>
                 <h2 style={{

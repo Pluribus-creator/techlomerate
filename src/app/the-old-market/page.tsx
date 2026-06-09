@@ -19,10 +19,7 @@ function slugify(title: string): string {
 
 export default async function OldMarketPage() {
   const today = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    year: "numeric",
+    weekday: "long", month: "long", day: "numeric", year: "numeric",
   })
 
   const { data: articles } = await supabase
@@ -55,7 +52,14 @@ export default async function OldMarketPage() {
             color: "var(--teal-600)", letterSpacing: "0.03em",
           }}>The Old Market</span>
         </div>
-        <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+        <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+          <a href="/one-recursive-loop" style={{ fontSize: "12px", textDecoration: "none", letterSpacing: "0.04em", fontWeight: 500 }}>
+            <span style={{ color: "#F25430" }}>One</span>
+            {" "}
+            <span style={{ color: "#4A90E2" }}>Recursive</span>
+            {" "}
+            <span style={{ color: "#9013FE" }}>Loop</span>
+          </a>
           <a href="/about" style={{ fontSize: "12px", color: "var(--text-tertiary)", textDecoration: "none", letterSpacing: "0.04em" }}>About</a>
           <span style={{ fontSize: "12px", color: "var(--text-tertiary)", letterSpacing: "0.05em" }}>{today}</span>
         </div>
@@ -65,10 +69,9 @@ export default async function OldMarketPage() {
         display: "block", position: "relative",
         borderBottom: "0.5px solid var(--border-teal)", textDecoration: "none",
       }}>
-       
         <img src="/assets/applemothershipad.png" alt="Apple" style={{
           width: "100%", height: "280px", objectFit: "cover",
-          objectPosition: "center 60%", display: "block",
+          objectPosition: "center 40%", display: "block",
         }} />
       </a>
 
@@ -77,8 +80,8 @@ export default async function OldMarketPage() {
           fontSize: "12px", color: "var(--text-tertiary)", lineHeight: 1.6,
           padding: "16px 20px", borderLeft: "2px solid var(--teal-400)", marginBottom: "40px",
         }}>
-          News and analysis of AI and technology markets. Not financial advice. Published every weekday.
-          
+          Patient capital. Long time horizons. Honest analysis of AI and technology markets.
+          Editor positions are disclosed where relevant. This is not financial advice.
         </div>
       </div>
 
@@ -107,9 +110,10 @@ export default async function OldMarketPage() {
                 </div>
                 {featured.ticker && (
                   <div style={{
-                    fontSize: "11px", fontWeight: 600, letterSpacing: "0.06em",
-                    padding: "2px 8px", borderRadius: "4px", color: "#fff",
-                    background: "linear-gradient(90deg, #FF6B6B, #FFB347, #FFD700, #5BC8F5, #9B59B6)",
+                    fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em",
+                    padding: "2px 8px", borderRadius: "3px",
+                    color: "var(--fg)", border: "1px solid var(--fg)",
+                    background: "transparent",
                   }}>{featured.ticker}</div>
                 )}
               </div>
@@ -158,9 +162,10 @@ export default async function OldMarketPage() {
                   </div>
                   {article.ticker && (
                     <div style={{
-                      fontSize: "11px", fontWeight: 600, letterSpacing: "0.06em",
-                      padding: "2px 8px", borderRadius: "4px", color: "#fff",
-                      background: "linear-gradient(90deg, #FF6B6B, #FFB347, #FFD700, #5BC8F5, #9B59B6)",
+                      fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em",
+                      padding: "2px 8px", borderRadius: "3px",
+                      color: "var(--fg)", border: "1px solid var(--fg)",
+                      background: "transparent",
                     }}>{article.ticker}</div>
                   )}
                 </div>

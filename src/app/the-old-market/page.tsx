@@ -62,7 +62,7 @@ export default async function OldMarketPage() {
       </nav>
 
       <a href="https://www.apple.com" target="_blank" rel="noopener noreferrer" style={{
-        display: "block", position: "sticky", top: "58px", zIndex: 100,
+        display: "block", position: "relative,
         borderBottom: "0.5px solid var(--border-teal)", textDecoration: "none",
       }}>
         <div style={{

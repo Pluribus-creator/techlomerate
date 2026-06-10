@@ -66,7 +66,7 @@ export default async function OldMarketPage() {
       </nav>
 
       <a href="https://www.apple.com" target="_blank" rel="noopener noreferrer" style={{
-        display: "block", position: "relative",
+        display: "block", position: "relative", overflow: "hidden",
         borderBottom: "0.5px solid var(--border-teal)", textDecoration: "none",
       }}>
         <img src="/assets/applemothershipad.png" alt="Apple" style={{

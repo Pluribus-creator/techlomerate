@@ -121,8 +121,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </nav>
 
       <a href="https://www.apple.com" target="_blank" rel="noopener noreferrer" style={{
-        display: "block", position: "relative",
-        borderBottom: "0.5px solid var(--border-teal)", textDecoration: "none",
+          display: "block", position: "relative", overflow: "hidden",
+          borderBottom: "0.5px solid var(--border-teal)", textDecoration: "none",
       }}>
         
         <img src="/assets/applemothershipad.png" alt="Apple" style={{

@@ -17,9 +17,7 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { background: var(--bg); color: var(--fg); }
-
 body {
   font-family: var(--font-sans), sans-serif;
   font-size: 16px;
@@ -28,8 +26,47 @@ body {
   color: var(--fg);
   -webkit-font-smoothing: antialiased;
 }
-
 h1, h2, h3, h4, h5 {
   font-family: var(--font-serif), serif;
   font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  nav {
+    padding: 10px 16px !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  nav > span:first-child,
+  nav > div:first-child > a:first-child {
+    font-size: 15px !important;
+  }
+  nav > div > span:last-child {
+    display: none !important;
+  }
+  nav a {
+    font-size: 11px !important;
+  }
+  main > div, main > section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  h1 {
+    font-size: 26px !important;
+    line-height: 1.25 !important;
+  }
+  h2 {
+    font-size: 19px !important;
+    line-height: 1.3 !important;
+  }
+  p {
+    font-size: 15px !important;
+    line-height: 1.75 !important;
+  }
+  a[href*="apple.com"] img {
+    height: 160px !important;
+  }
+  article img {
+    height: 200px !important;
+  }
 }

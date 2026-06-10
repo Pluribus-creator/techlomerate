@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
@@ -181,6 +182,7 @@ export default async function OneRecursiveLoopPage() {
 
         </div>
       </div>
+      <Footer />
     </main>
   )
 }

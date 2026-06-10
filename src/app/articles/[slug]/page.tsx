@@ -1,6 +1,6 @@
+import Footer from '@/components/Footer'
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
-import Footer from '@/components/Footer'
 
 export const revalidate = 60
 

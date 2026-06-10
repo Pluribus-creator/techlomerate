@@ -75,7 +75,9 @@ export default async function OneRecursiveLoopPage() {
         borderBottom: "0.5px solid var(--border-teal)", textDecoration: "none",
       }}>
         
-        <img src="/assets/applemothershipad.png" alt="Apple" style={{
+        <picture>
+          <source media="(max-width: 640px)" srcSet="https://rfttrfkvnsartyhleyyw.supabase.co/storage/v1/object/public/article-images/applemothershipad-mobile.png" />
+          <img src="/assets/applemothershipad.png" alt="Apple" style={{
           width: "100%", height: "280px", objectFit: "cover",
           objectPosition: "center 60%", display: "block",
         }} />

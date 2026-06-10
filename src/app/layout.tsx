@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { EB_Garamond, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import Script from "next/script";
 import "./globals.css";
 
 const serif = EB_Garamond({
@@ -22,6 +21,9 @@ export const metadata: Metadata = {
   verification: {
     google: "iWnpECzPgqlifopKrFsdrBmHJTsMedRux3UhJOB0epI",
   },
+  other: {
+    "google-adsense-account": "ca-pub-9158919677237359",
+  },
 };
 
 export default function RootLayout({
@@ -32,11 +34,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
       <head>
-        <Script
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9158919677237359"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
       </head>
       <body>

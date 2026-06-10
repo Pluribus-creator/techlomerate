@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { EB_Garamond, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 import "./globals.css";
 
 const serif = EB_Garamond({
@@ -30,6 +31,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9158919677237359"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
       <body>
         {children}
         <Analytics />

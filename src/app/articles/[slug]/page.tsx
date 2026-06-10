@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
+import Footer from '@/components/Footer'
 
 export const revalidate = 60
 
@@ -223,6 +224,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           )}
         </div>
       </div>
+      <Footer />
     </main>
   )
 }

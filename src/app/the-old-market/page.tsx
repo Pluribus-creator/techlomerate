@@ -71,7 +71,7 @@ export default async function OldMarketPage() {
       }}>
         <img src="/assets/applemothershipad.png" alt="Apple" style={{
           width: "100%", height: "280px", objectFit: "cover",
-          objectPosition: "center 40%", display: "block",
+          objectPosition: "right 40%", display: "block",
         }} />
       </a>
 

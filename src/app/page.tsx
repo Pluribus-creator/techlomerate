@@ -78,9 +78,7 @@ export default async function Home() {
         }}
       >
         
-        <picture>
-          <source media="(max-width: 640px)" srcSet="https://rfttrfkvnsartyhleyyw.supabase.co/storage/v1/object/public/article-images/applemothershipad-mobile.png" />
-          <img src="/assets/applemothershipad.png" alt="Apple" style={{
+        <img src="/assets/applemothershipad.png" alt="Apple" style={{
           width: "100%", height: "280px", objectFit: "cover",
           objectPosition: "center 60%", display: "block",
         }} />

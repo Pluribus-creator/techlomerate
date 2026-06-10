@@ -76,3 +76,9 @@ h1, h2, h3, h4, h5 {
     object-position: center 75% !important;
   }
 }
+
+@media (max-width: 640px) {
+  a[href*="apple.com"] img {
+    object-position: center 60% !important;
+  }
+}

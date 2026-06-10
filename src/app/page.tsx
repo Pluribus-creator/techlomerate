@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import { supabase } from '@/lib/supabase'
 
 export const revalidate = 60
@@ -178,6 +179,7 @@ export default async function Home() {
 
         </div>
       </div>
+      <Footer />
     </main>
   )
 }

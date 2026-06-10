@@ -108,7 +108,7 @@ export default async function Home() {
                 <div style={{ marginBottom: "24px" }}>
                   <a href={`/articles/${slugify(featured.title)}`}>
                     <img src={featured.image_url} alt={featured.title} style={{
-                      width: "100%", height: "420px", objectFit: "cover",
+                      width: "100%", height: "439px", objectFit: "cover",
                       objectPosition: "center", borderRadius: "4px", display: "block",
                     }} />
                   </a>

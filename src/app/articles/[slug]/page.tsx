@@ -150,7 +150,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 alt={article.title}
                 style={{
                   width: "100%",
-                  height: "420px",
+                  height: "439px",
                   objectFit: "cover",
                   objectPosition: "center",
                   borderRadius: "4px",

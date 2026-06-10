@@ -69,16 +69,10 @@ export default async function OldMarketPage() {
         display: "block", position: "relative", overflow: "hidden",
         borderBottom: "0.5px solid var(--border-teal)", textDecoration: "none",
       }}>
-        <picture>
-          <source media="(max-width: 640px)" srcSet="https://rfttrfkvnsartyhleyyw.supabase.co/storage/v1/object/public/article-images/applemothershipad-mobile.png" />
-          <picture>
-          <source media="(max-width: 640px)" srcSet="https://rfttrfkvnsartyhleyyw.supabase.co/storage/v1/object/public/article-images/applemothershipad-mobile.png" />
-          <img src="/assets/applemothershipad.png" alt="Apple" style={{
+        <img src="/assets/applemothershipad.png" alt="Apple" style={{
           width: "100%", height: "280px", objectFit: "cover",
           objectPosition: "right 40%", display: "block",
         }} />
-        </picture>
-        </picture>
       </a>
 
       <div style={{ maxWidth: "780px", margin: "0 auto", padding: "40px 40px 24px" }}>

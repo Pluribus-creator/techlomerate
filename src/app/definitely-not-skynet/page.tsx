@@ -82,8 +82,8 @@ export default async function DefinitelyNotSkynet() {
           fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "16px",
           color: "var(--text-secondary)", lineHeight: 1.6, maxWidth: "560px", margin: "0 auto",
         }}>
-          Intelligence is leaving the screen and entering the world. A record of the machines
-          that move, lift, walk, and work — and the human stakes of all of it.
+          Intelligent, curious, capable: our new robot friends are here. A record of the machines
+          that move, lift, walk, and work — and the human and AI stakes of it all.
         </p>
       </div>
 

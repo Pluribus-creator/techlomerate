@@ -65,7 +65,7 @@ export default async function OneRecursiveLoopPage() {
         </div>
         <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
           <a href="/the-old-market" style={{ fontSize: "12px", color: "var(--teal-600)", textDecoration: "none", letterSpacing: "0.04em", fontWeight: 500 }}>The Old Market</a>
-          
+          <a href="/definitely-not-skynet" style={{ fontSize: "12px", color: "#E8A33D", textDecoration: "none", letterSpacing: "0.04em", fontWeight: 500 }}>Definitely Not Skynet</a>
           <a href="/about" style={{ fontSize: "12px", color: "var(--text-tertiary)", textDecoration: "none", letterSpacing: "0.04em" }}>About</a>
           <span style={{ fontSize: "12px", color: "var(--text-tertiary)", letterSpacing: "0.05em" }}>{today}</span>
         </div>

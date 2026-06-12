@@ -21,7 +21,7 @@ export async function POST(request: Request) {
   const featured = formData.get('featured') === 'true'
   const table = (formData.get('table') as string) || 'articles'
 
-  const validTables = ['articles', 'apple_articles', 'market_articles']
+  const validTables = ['articles', 'apple_articles', 'market_articles', 'robotics_articles']
   const targetTable = validTables.includes(table) ? table : 'articles'
 
   if (featured) {

@@ -10,6 +10,7 @@ const deskConfig = {
   main: { table: 'articles', voice: 'Techlomerate, a thoughtful AI news publication. Clear, honest, no hype.', categories: 'Research, Policy, Safety, Industry, Ethics, Science, AI' },
   apple: { table: 'apple_articles', voice: 'One Recursive Loop, the Apple desk of Techlomerate. Thoughtful, precise, genuinely curious about what Apple choices mean for how people relate to their devices.', categories: 'Hardware, Software, AI, Privacy, Design, Business, Developer' },
   market: { table: 'market_articles', voice: 'The Old Market, the investment desk of Techlomerate. Measured, patient, long time horizons.', categories: 'Earnings, Infrastructure, Venture, Policy, Macro, Research' },
+  robotics: { table: 'robotics_articles', voice: 'Definitely Not Skynet, the robotics and embodied-AI desk of Techlomerate. Grounded, curious about both the engineering and the human stakes, never sensational. The answer to "are you building Skynet" is no — we pay attention precisely so it isn\'t.', categories: 'Humanoids, Industrial, Research, Labor, Embodiment, Policy' },
 }
 
 export async function POST(request: Request) {

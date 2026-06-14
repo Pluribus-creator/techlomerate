@@ -93,7 +93,7 @@ Select the 6 most significant articles. Prioritize:
 For each:
 1. Write a 2-3 sentence summary in One Recursive Loop's voice: thoughtful, precise, genuinely curious about what Apple's choices mean for how people relate to their devices.
 2. Assign a category: Hardware, Software, AI, Privacy, Design, Business, Developer
-3. Estimate VAD scores (valence -1 to 1, arousal 0 to 1, dominance 0 to 1)
+3. Estimate rough affect (model estimate, not measurement) (valence -1 to 1, arousal 0 to 1, dominance 0 to 1)
 
 Respond in this exact JSON format:
 {
@@ -144,9 +144,9 @@ Respond in this exact JSON format:
         status: 'pending',
         featured: index === 0,
         published_at: new Date().toISOString(),
-        valence: article.valence,
-        arousal: article.arousal,
-        dominance: article.dominance,
+        llm_valence_est: article.valence,
+        llm_arousal_est: article.arousal,
+        llm_dominance_est: article.dominance,
       }))
 
     if (articlesToInsert.length === 0) {

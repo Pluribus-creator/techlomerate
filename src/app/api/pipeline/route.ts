@@ -104,7 +104,7 @@ ${articleList}
 Select the 6 most significant articles. Prioritise genuine news, research breakthroughs, and policy developments over tutorials, listicles, and promotional content. For each:
 1. Write a 2-3 sentence summary in Techlomerate's voice: clear, honest, no breathlessness, no hype
 2. Assign a category from exactly these options: Research, Policy, Safety, Industry, Ethics, Science
-3. Estimate VAD scores (valence -1 to 1, arousal 0 to 1, dominance 0 to 1)
+3. Estimate rough affect (model estimate, not measurement) (valence -1 to 1, arousal 0 to 1, dominance 0 to 1)
 
 Category guidance:
 - Research: academic papers, studies, new findings, arxiv
@@ -164,9 +164,9 @@ Respond in this exact JSON format:
         status: 'pending',
         featured: index === 0,
         published_at: new Date().toISOString(),
-        valence: article.valence,
-        arousal: article.arousal,
-        dominance: article.dominance,
+        llm_valence_est: article.valence,
+        llm_arousal_est: article.arousal,
+        llm_dominance_est: article.dominance,
       }))
 
     if (articlesToInsert.length === 0) {

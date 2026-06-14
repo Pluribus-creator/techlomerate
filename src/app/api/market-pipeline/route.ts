@@ -95,7 +95,7 @@ For each selected article:
 1. Write a 2-3 sentence summary in The Old Market voice: measured, patient, no breathlessness. What does this mean for capital over five years, not five minutes.
 2. Assign a category: Earnings, Infrastructure, Venture, Policy, Macro, Research
 3. Identify the most relevant stock ticker if applicable (e.g. NVDA, MSFT, GOOG) or null if none
-4. Estimate VAD scores (valence -1 to 1, arousal 0 to 1, dominance 0 to 1)
+4. Estimate rough affect (model estimate, not measurement) (valence -1 to 1, arousal 0 to 1, dominance 0 to 1)
 
 Respond in this exact JSON format:
 {
@@ -149,9 +149,9 @@ Respond in this exact JSON format:
         status: 'pending',
         featured: index === 0,
         published_at: new Date().toISOString(),
-        valence: article.valence,
-        arousal: article.arousal,
-        dominance: article.dominance,
+        llm_valence_est: article.valence,
+        llm_arousal_est: article.arousal,
+        llm_dominance_est: article.dominance,
       }))
 
     if (articlesToInsert.length === 0) {

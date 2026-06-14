@@ -120,7 +120,7 @@ export default async function AdminPage({
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px', flexWrap: 'wrap' }}>
                         <span style={{ fontSize: '11px', color: 'var(--teal-600)', fontWeight: 500 }}>{article.category}</span>
                         <a href={article.source_url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', color: 'var(--teal-400)', textDecoration: 'none' }}>{article.source_name} ↗</a>
-                        {article.valence !== null && <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>V:{article.valence?.toFixed(1)} A:{article.arousal?.toFixed(1)} D:{article.dominance?.toFixed(1)}</span>}
+                        {article.llm_valence_est !== null && <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>est V:{article.llm_valence_est?.toFixed(1)} A:{article.llm_arousal_est?.toFixed(1)} D:{article.llm_dominance_est?.toFixed(1)}</span>}
                         <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>{new Date(article.published_at).toLocaleDateString("en-US", { month: 'short', day: 'numeric' })}</span>
                       </div>
                       <div style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', fontWeight: 500, marginBottom: '8px', lineHeight: 1.3 }}>{article.title}</div>

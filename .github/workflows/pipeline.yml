@@ -1,11 +1,9 @@
 name: Techlomerate Pipeline
-
 on:
   schedule:
     - cron: '0 12 * * *'
     - cron: '0 21 * * *'
   workflow_dispatch:
-
 jobs:
   run-pipeline:
     runs-on: ubuntu-latest
@@ -13,3 +11,6 @@ jobs:
       - name: Trigger pipeline
         run: |
           curl -f "https://techlomerate.vercel.app/api/pipeline?secret=${{ secrets.PIPELINE_SECRET }}"
+      - name: Trigger Thirst pipeline
+        run: |
+          curl -f "https://techlomerate.vercel.app/api/thirst-pipeline?secret=${{ secrets.PIPELINE_SECRET }}"

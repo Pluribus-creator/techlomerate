@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     const sourceName = new URL(url).hostname.replace('www.', '')
 
     const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1000,
       messages: [{ role: 'user', content: `You are the editorial AI for ${config.voice}\n\nWrite a summary for this article.\nTitle: ${rawTitle}\nURL: ${url}\nSource: ${sourceName}\nSnippet: ${snippet}\n\nWrite a 2-3 sentence summary. Assign a category from: ${config.categories}. Estimate VAD scores (valence -1 to 1, arousal 0 to 1, dominance 0 to 1).\n\nRespond in this exact JSON format:\n{\n  "title": "cleaned up title",\n  "summary": "your summary",\n  "category": "category",\n  "source_name": "publication name",\n  "valence": 0.0,\n  "arousal": 0.0,\n  "dominance": 0.0\n}` }]
     })

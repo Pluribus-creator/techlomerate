@@ -1,3 +1,12 @@
+// src/app/api/thirst-pipeline/route.ts
+// The Thirst — gear / consumer-tech desk.
+// Cloned from /api/pipeline, adapted: gear feeds, thirst_articles table,
+// Thirst editorial voice, gear categories, reader_mode.
+//
+// FIREWALL: this route never writes has_affiliate / affiliate_url / verdict.
+// Affiliate links and the buy/skip call are added by a human at curation — so
+// ingest is structurally incapable of putting money on a page. By design.
+
 import { NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@supabase/supabase-js'
@@ -14,35 +23,30 @@ const supabase = createClient(
 
 const parser = new Parser()
 
+// Verified active 2026-06-16: verge, engadget, 9to5mac, ars, toms guide.
+// The rest follow each site's standard feed pattern; the try/catch below
+// silently skips any that 404, same as your other desks. Watch iFixit,
+// DPReview, Notebookcheck on the first run — they move more than the others.
 const FEEDS = [
-  'https://www.technologyreview.com/feed/',
-  'https://venturebeat.com/category/ai/feed/',
-  'https://openai.com/news/rss.xml',
-  'https://www.deepmind.com/blog/rss.xml',
-  'https://anthropic.com/news/rss.xml',
-  'https://feeds.feedburner.com/TheAIAlignmentForum',
-  'https://jack-clark.net/feed/',
-  'https://www.theverge.com/ai-artificial-intelligence/rss/index.xml',
-  'https://techcrunch.com/category/artificial-intelligence/feed/',
-  'https://wired.com/feed/tag/artificial-intelligence/rss',
-  'https://www.reuters.com/technology/artificial-intelligence/rss',
-  'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml',
-  'https://feeds.a.dj.com/rss/RSSWSJD.xml',
-  'https://spectrum.ieee.org/feeds/feed.rss',
-  'https://restofworld.org/feed/',
-  'https://arxiv.org/rss/cs.AI',
-  'https://arxiv.org/rss/cs.LG',
-  'https://huggingface.co/blog/feed.xml',
-  'https://ai.meta.com/blog/rss/',
-  'https://blogs.microsoft.com/ai/feed/',
-  'https://research.google/blog/rss/',
-  'https://www.marktechpost.com/feed/',
-  'https://arstechnica.com/tag/ai/feed/',
-  'https://www.theguardian.com/technology/rss',
-  'https://towardsdatascience.com/feed',
-  'https://futureoflife.org/feed/',
-  'https://paperswithcode.com/rss',
-  'https://asia.nikkei.com/rss/feed/nar',
+  // the adopter lane — buy-the-new-thing
+  'https://www.theverge.com/rss/index.xml',
+  'https://www.engadget.com/rss.xml',
+  'https://9to5mac.com/feed',
+  'https://9to5google.com/feed',
+  'https://www.androidauthority.com/feed/',
+  'https://sixcolors.com/feed/',
+  // the stretcher lane — depth, value, longevity
+  'https://feeds.arstechnica.com/arstechnica/index',
+  'https://www.macstories.net/feed/',
+  'https://www.tomshardware.com/feeds.xml',
+  'https://www.notebookcheck.net/News.152.0.html?type=rss',
+  // the spine — own it, repair it, make it last
+  'https://www.ifixit.com/News/rss',
+  'https://hackaday.com/feed/',
+  'https://www.dpreview.com/feeds/news.xml',
+  // the buying / sugar-rush
+  'https://www.tomsguide.com/feeds.xml',
+  'https://9to5toys.com/feed',
 ]
 
 export async function GET(request: Request) {
@@ -55,7 +59,7 @@ export async function GET(request: Request) {
 
   try {
     const { data: existingArticles } = await supabase
-      .from('articles')
+      .from('thirst_articles')
       .select('source_url')
 
     const existingUrls = new Set(
@@ -91,29 +95,33 @@ export async function GET(request: Request) {
       .join('\n\n')
 
     const curationResponse = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6', // claude-sonnet-4-20250514 was RETIRED June 15 2026 — update your other desks to this string too
       max_tokens: 4000,
       messages: [{
         role: 'user',
-        content: `You are the editorial AI for Techlomerate, a thoughtful AI news publication with a contemplative, feminine aesthetic. It values intellectual rigor, human dignity, and honest reporting without hype.
+        content: `You are the editorial AI for The Thirst, the consumer-tech and gear desk of Techlomerate. The Thirst covers the stuff people actually carry and use — phones, computers, audio, wearables, cameras, AI hardware, smart home, gaming, and the gear worth caring about.
+
+Voice: playful, warm, honest, a little self-aware. Desire is allowed here — wanting the new thing is not a sin, and neither is keeping what you own for a decade. NEVER moralize about how anyone spends their money. No hype, no breathless "best ever," no fake urgency, no envy dressed up as wisdom.
+
+You honor two readers equally:
+- the adopter, who buys the new thing for the joy of it
+- the stretcher, who makes gear last judiciously to save money
+Both are completely valid. When something is overhyped or not worth it, say so plainly — "skip it" and "the one you have is fine" are honest, welcome answers.
 
 Here are today's candidate articles:
 
 ${articleList}
 
-Select the 6 most significant articles. Prioritise genuine news, research breakthroughs, and policy developments over tutorials, listicles, and promotional content. For each:
-1. Write a 2-3 sentence summary in Techlomerate's voice: clear, honest, no breathlessness, no hype
-2. Assign a category from exactly these options: Research, Policy, Safety, Industry, Ethics, Science
-3. Estimate VAD scores (valence -1 to 1, arousal 0 to 1, dominance 0 to 1)
+Select the 6 most significant. Prioritise genuine product news, reviews, launches, meaningful updates, repairability/ownership stories, and real deals over rumour-churn, spec-sheet filler, and promotional fluff. For each:
+1. Write a 2-3 sentence summary in The Thirst's voice: clear, honest, a little fun, no hype
+2. Assign a category from exactly these options: Phones, Computers, Audio, Wearables, Cameras, AI Hardware, Smart Home, Gaming, Repair, Deals
+3. Assign reader_mode from exactly these options: adopter, stretcher, both
+   - adopter = mainly for the buy-the-new-thing reader
+   - stretcher = mainly for the make-it-last / value reader
+   - both = matters either way
+4. Estimate rough affect (model estimate, not measurement) (valence -1 to 1, arousal 0 to 1, dominance 0 to 1)
 
-Category guidance:
-- Research: academic papers, studies, new findings, arxiv
-- Policy: regulation, government, law, governance, treaties
-- Safety: AI safety, alignment, existential risk, misuse
-- Industry: funding, startups, acquisitions, business strategy, earnings
-- Ethics: bias, fairness, privacy, social impact, labor displacement
-- Science: breakthroughs, technical advances, new capabilities
-- AI: general AI news that doesn't fit the above
+Do NOT assign a buy/skip verdict — that is a human editorial call made at curation, not from a snippet.
 
 Respond in this exact JSON format:
 {
@@ -124,6 +132,7 @@ Respond in this exact JSON format:
       "source_url": "exact url",
       "source_name": "source name",
       "category": "one of the categories above",
+      "reader_mode": "adopter | stretcher | both",
       "valence": 0.0,
       "arousal": 0.0,
       "dominance": 0.0
@@ -152,6 +161,7 @@ Respond in this exact JSON format:
         source_url: string
         source_name: string
         category: string
+        reader_mode: string
         valence: number
         arousal: number
         dominance: number
@@ -161,12 +171,15 @@ Respond in this exact JSON format:
         source_url: article.source_url,
         source_name: article.source_name,
         category: article.category,
+        reader_mode: article.reader_mode,
         status: 'pending',
         featured: index === 0,
         published_at: new Date().toISOString(),
-        valence: article.valence,
-        arousal: article.arousal,
-        dominance: article.dominance,
+        llm_valence_est: article.valence,
+        llm_arousal_est: article.arousal,
+        llm_dominance_est: article.dominance,
+        // verdict, has_affiliate, affiliate_url intentionally NOT set here —
+        // they default (null / false / null) and are written only by a human.
       }))
 
     if (articlesToInsert.length === 0) {
@@ -174,7 +187,7 @@ Respond in this exact JSON format:
     }
 
     const { data, error } = await supabase
-      .from('articles')
+      .from('thirst_articles')
       .insert(articlesToInsert)
       .select()
 
@@ -189,7 +202,8 @@ Respond in this exact JSON format:
     })
 
   } catch (error) {
-    console.error('Pipeline error:', error)
-    return NextResponse.json({ error: 'Pipeline failed' }, { status: 500 })
+    console.error('Thirst pipeline error:', error)
+    const message = error instanceof Error ? error.message : String(error)
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

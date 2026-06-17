@@ -33,7 +33,7 @@ const rainbowText: CSSProperties = {
 // shared link style — clamp() shrinks it, nowrap keeps each name in one piece
 const link: CSSProperties = {
   fontFamily: 'var(--font-serif)',
-  fontSize: 'clamp(13px, 1.6vw, 18px)',
+  fontSize: 'clamp(11px, 1.25vw, 18px)',
   fontWeight: 500,
   letterSpacing: '0.03em',
   textDecoration: 'none',
@@ -62,7 +62,7 @@ function DeskLink({ desk }: { desk: Desk }) {
 function CurrentWordmark({ current }: { current: Current }) {
   const base: CSSProperties = {
     fontFamily: 'var(--font-serif)',
-    fontSize: 'clamp(14px, 1.7vw, 18px)',
+    fontSize: 'clamp(12px, 1.3vw, 18px)',
     fontWeight: 500,
     letterSpacing: '0.03em',
     whiteSpace: 'nowrap',
@@ -89,18 +89,18 @@ export default function SiteNav({ current }: { current: Current }) {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '18px 40px', borderBottom: '0.5px solid var(--border-teal)',
         position: 'sticky', top: 0, zIndex: 99, background: 'var(--bg)',
-        flexWrap: 'wrap', gap: '12px',
+        flexWrap: 'nowrap', overflowX: 'auto', gap: '16px',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           {current === 'home' ? (
-            <span style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(16px, 1.9vw, 20px)', fontWeight: 500, letterSpacing: '0.03em', whiteSpace: 'nowrap' }}>Techlomerate</span>
+            <span style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(14px, 1.5vw, 20px)', fontWeight: 500, letterSpacing: '0.03em', whiteSpace: 'nowrap' }}>Techlomerate</span>
           ) : (
-            <a href="/" style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(16px, 1.9vw, 20px)', fontWeight: 500, letterSpacing: '0.03em', color: 'var(--fg)', textDecoration: 'none', whiteSpace: 'nowrap' }}>Techlomerate</a>
+            <a href="/" style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(14px, 1.5vw, 20px)', fontWeight: 500, letterSpacing: '0.03em', color: 'var(--fg)', textDecoration: 'none', whiteSpace: 'nowrap' }}>Techlomerate</a>
           )}
           {showSeparator && <span style={{ color: 'var(--text-tertiary)', fontSize: '16px' }}>·</span>}
           <CurrentWordmark current={current} />
         </div>
-        <div style={{ display: 'flex', gap: 'clamp(10px, 1.6vw, 20px)', alignItems: 'center', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 'clamp(8px, 1.2vw, 18px)', alignItems: 'center', flexWrap: 'nowrap' }}>
           {others.map((d) => <DeskLink key={d} desk={d} />)}
           <a href="/about" style={{ fontSize: '12px', color: 'var(--text-tertiary)', textDecoration: 'none', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>About</a>
           <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>{today}</span>

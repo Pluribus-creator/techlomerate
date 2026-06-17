@@ -95,10 +95,10 @@ export default async function TheThirstPage() {
           }}>The Thirst</span>
         </div>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <a href="/the-old-market" style={{ fontSize: '12px', color: 'var(--teal-600)', textDecoration: 'none', letterSpacing: '0.04em', fontWeight: 500 }}>
+          <a href="/the-old-market" style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 500, color: 'var(--teal-600)', textDecoration: 'none', letterSpacing: '0.03em' }}>
             The Old Market
           </a>
-          <a href="/one-recursive-loop" style={{ fontSize: '12px', textDecoration: 'none', letterSpacing: '0.04em', fontWeight: 500 }}>
+          <a href="/one-recursive-loop" style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 500, textDecoration: 'none', letterSpacing: '0.03em' }}>
             <span style={{ color: '#F25430' }}>One</span>
             {' '}
             <span style={{ color: '#4A90E2' }}>Recursive</span>
@@ -106,8 +106,8 @@ export default async function TheThirstPage() {
             <span style={{ color: '#9013FE' }}>Loop</span>
           </a>
           <a href="/definitely-not-skynet" style={{
-            fontSize: '12px', color: '#E8A33D', textDecoration: 'none',
-            letterSpacing: '0.04em', fontWeight: 500,
+            fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 500,
+            color: '#E8A33D', textDecoration: 'none', letterSpacing: '0.03em',
           }}>Definitely Not Skynet</a>
           <a href="/about" style={{ fontSize: '12px', color: 'var(--text-tertiary)', textDecoration: 'none', letterSpacing: '0.04em' }}>About</a>
           <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', letterSpacing: '0.05em' }}>{today}</span>

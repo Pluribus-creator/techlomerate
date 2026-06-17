@@ -51,11 +51,14 @@ export default async function AdminPage({
   const { data: roboticsPending } = await adminSupabase
     .from('robotics_articles').select('*').eq('status', 'pending').order('published_at', { ascending: false })
 
+  const { data: thirstPending } = await adminSupabase
+    .from('thirst_articles').select('*').eq('status', 'pending').order('published_at', { ascending: false })
+
   const { data: approved } = await adminSupabase
     .from('articles').select('*').eq('status', 'approved').order('published_at', { ascending: false }).limit(6)
 
   const successDesk = resolvedParams.desk || 'main'
-  const deskLabel = successDesk === 'apple' ? 'One Recursive Loop' : successDesk === 'market' ? 'The Old Market' : successDesk === 'robotics' ? 'Definitely Not Skynet' : 'Techlomerate'
+  const deskLabel = successDesk === 'apple' ? 'One Recursive Loop' : successDesk === 'market' ? 'The Old Market' : successDesk === 'robotics' ? 'Definitely Not Skynet' : successDesk === 'thirst' ? 'The Thirst' : 'Techlomerate'
 
   return (
     <main style={{ minHeight: '100vh', background: 'var(--bg)', padding: '40px' }}>
@@ -65,7 +68,7 @@ export default async function AdminPage({
           <div>
             <div style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', marginBottom: '4px' }}>Editorial gate</div>
             <div style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>
-              {pending?.length || 0} main · {applePending?.length || 0} apple · {marketPending?.length || 0} market · {roboticsPending?.length || 0} robotics pending
+              {pending?.length || 0} main · {applePending?.length || 0} apple · {marketPending?.length || 0} market · {roboticsPending?.length || 0} robotics · {thirstPending?.length || 0} thirst pending
             </div>
           </div>
           <a href="/" style={{ fontSize: '12px', color: 'var(--teal-600)', textDecoration: 'none' }}>View site →</a>
@@ -261,6 +264,44 @@ export default async function AdminPage({
           </section>
         )}
 
+        {thirstPending && thirstPending.length > 0 && (
+          <section style={{ marginBottom: '40px' }}>
+            <div style={{ fontSize: '11px', color: '#FF2A6D', fontWeight: 500, letterSpacing: '0.06em', marginBottom: '16px' }}>THE THIRST — PENDING</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {thirstPending.map((article) => (
+                <div key={article.id} style={{ border: '0.5px solid #FF2A6D', borderRadius: '8px', padding: '18px 20px', background: 'var(--bg)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px' }}>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px', flexWrap: 'wrap' }}>
+                        <span style={{ fontSize: '11px', color: '#FF2A6D', fontWeight: 500 }}>{article.category}</span>
+                        {article.reader_mode && <span style={{ fontSize: '11px', color: '#44576D', fontWeight: 500 }}>{article.reader_mode}</span>}
+                        <a href={article.source_url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', color: 'var(--teal-400)', textDecoration: 'none' }}>{article.source_name} ↗</a>
+                        <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>{new Date(article.published_at).toLocaleDateString("en-US", { month: 'short', day: 'numeric' })}</span>
+                      </div>
+                      <div style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', fontWeight: 500, marginBottom: '8px', lineHeight: 1.3 }}>{article.title}</div>
+                      <div style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{article.summary}</div>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flexShrink: 0 }}>
+                      <form action="/api/admin/update" method="POST">
+                        <input type="hidden" name="id" value={article.id} /><input type="hidden" name="status" value="approved" /><input type="hidden" name="featured" value="false" /><input type="hidden" name="table" value="thirst_articles" />
+                        <button type="submit" style={{ padding: '7px 16px', background: '#FF2A6D', color: '#fff', border: 'none', borderRadius: '6px', fontSize: '12px', cursor: 'pointer', width: '100%' }}>Approve</button>
+                      </form>
+                      <form action="/api/admin/update" method="POST">
+                        <input type="hidden" name="id" value={article.id} /><input type="hidden" name="status" value="approved" /><input type="hidden" name="featured" value="true" /><input type="hidden" name="table" value="thirst_articles" />
+                        <button type="submit" style={{ padding: '7px 16px', background: '#44576D', color: '#fff', border: 'none', borderRadius: '6px', fontSize: '12px', cursor: 'pointer', width: '100%' }}>Feature</button>
+                      </form>
+                      <form action="/api/admin/update" method="POST">
+                        <input type="hidden" name="id" value={article.id} /><input type="hidden" name="status" value="rejected" /><input type="hidden" name="featured" value="false" /><input type="hidden" name="table" value="thirst_articles" />
+                        <button type="submit" style={{ padding: '7px 16px', background: 'transparent', color: 'var(--text-tertiary)', border: '0.5px solid var(--border)', borderRadius: '6px', fontSize: '12px', cursor: 'pointer', width: '100%' }}>Reject</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {approved && approved.length > 0 && (
           <section>
             <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', fontWeight: 500, letterSpacing: '0.06em', marginBottom: '16px' }}>RECENTLY APPROVED</div>
@@ -281,7 +322,7 @@ export default async function AdminPage({
           </section>
         )}
 
-        {(!pending || pending.length === 0) && (!applePending || applePending.length === 0) && (!marketPending || marketPending.length === 0) && (!roboticsPending || roboticsPending.length === 0) && (
+        {(!pending || pending.length === 0) && (!applePending || applePending.length === 0) && (!marketPending || marketPending.length === 0) && (!roboticsPending || roboticsPending.length === 0) && (!thirstPending || thirstPending.length === 0) && (
           <div style={{ textAlign: 'center', padding: '40px 0', color: 'var(--text-tertiary)', fontSize: '14px' }}>
             All queues clear.
             <div style={{ marginTop: '12px', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -289,6 +330,7 @@ export default async function AdminPage({
               <a href={`/api/apple-pipeline?secret=${process.env.PIPELINE_SECRET}`} style={{ fontSize: '12px', color: '#4A90E2', textDecoration: 'none' }}>Run Apple pipeline →</a>
               <a href={`/api/market-pipeline?secret=${process.env.PIPELINE_SECRET}`} style={{ fontSize: '12px', color: 'var(--teal-600)', textDecoration: 'none' }}>Run market pipeline →</a>
               <a href={`/api/robotics-pipeline?secret=${process.env.PIPELINE_SECRET}`} style={{ fontSize: '12px', color: '#E8A33D', textDecoration: 'none' }}>Run robotics pipeline →</a>
+              <a href={`/api/thirst-pipeline?secret=${process.env.PIPELINE_SECRET}`} style={{ fontSize: '12px', color: '#FF2A6D', textDecoration: 'none' }}>Run Thirst pipeline →</a>
             </div>
           </div>
         )}

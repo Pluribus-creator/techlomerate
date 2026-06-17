@@ -54,7 +54,7 @@ export default async function OldMarketPage() {
           }}>The Old Market</span>
         </div>
         <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-          <a href="/one-recursive-loop" style={{ fontSize: "12px", textDecoration: "none", letterSpacing: "0.04em", fontWeight: 500 }}>
+          <a href="/one-recursive-loop" style={{ fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500, textDecoration: "none", letterSpacing: "0.03em" }}>
             <span style={{ color: "#F25430" }}>One</span>
             {" "}
             <span style={{ color: "#4A90E2" }}>Recursive</span>
@@ -62,9 +62,13 @@ export default async function OldMarketPage() {
             <span style={{ color: "#9013FE" }}>Loop</span>
           </a>
           <a href="/definitely-not-skynet" style={{
-            fontSize: "12px", color: "#E8A33D", textDecoration: "none",
-            letterSpacing: "0.04em", fontWeight: 500,
+            fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500,
+            color: "#E8A33D", textDecoration: "none", letterSpacing: "0.03em",
           }}>Definitely Not Skynet</a>
+          <a href="/the-thirst" style={{
+            fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500,
+            color: "#FF2A6D", textDecoration: "none", letterSpacing: "0.03em",
+          }}>The Thirst</a>
           <a href="/about" style={{ fontSize: "12px", color: "var(--text-tertiary)", textDecoration: "none", letterSpacing: "0.04em" }}>About</a>
           <span style={{ fontSize: "12px", color: "var(--text-tertiary)", letterSpacing: "0.05em" }}>{today}</span>
         </div>

@@ -1,4 +1,5 @@
 import Footer from '@/components/Footer'
+import SiteNav from '@/components/SiteNav'
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
@@ -19,10 +20,6 @@ function slugify(title: string): string {
 }
 
 export default async function OldMarketPage() {
-  const today = new Date().toLocaleDateString("en-US", {
-    weekday: "long", month: "long", day: "numeric", year: "numeric",
-  })
-
   const { data: articles } = await supabase
     .from('market_articles')
     .select('*')
@@ -35,44 +32,7 @@ export default async function OldMarketPage() {
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg)", overflow: "clip" }}>
 
-      <div style={{ height: "2px", background: "var(--teal-400)" }} />
-
-      <nav style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "18px 40px", borderBottom: "0.5px solid var(--border-teal)",
-        position: "sticky", top: 0, zIndex: 99, background: "var(--bg)",
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-          <a href="/" style={{
-            fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 500,
-            letterSpacing: "0.03em", color: "var(--fg)", textDecoration: "none",
-          }}>Techlomerate</a>
-          <span style={{ color: "var(--text-tertiary)", fontSize: "16px" }}>·</span>
-          <span style={{
-            fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500,
-            color: "var(--teal-600)", letterSpacing: "0.03em",
-          }}>The Old Market</span>
-        </div>
-        <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-          <a href="/one-recursive-loop" style={{ fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500, textDecoration: "none", letterSpacing: "0.03em" }}>
-            <span style={{ color: "#F25430" }}>One</span>
-            {" "}
-            <span style={{ color: "#4A90E2" }}>Recursive</span>
-            {" "}
-            <span style={{ color: "#9013FE" }}>Loop</span>
-          </a>
-          <a href="/definitely-not-skynet" style={{
-            fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500,
-            color: "#E8A33D", textDecoration: "none", letterSpacing: "0.03em",
-          }}>Definitely Not Skynet</a>
-          <a href="/the-thirst" style={{
-            fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500,
-            color: "#FF2A6D", textDecoration: "none", letterSpacing: "0.03em",
-          }}>The Thirst</a>
-          <a href="/about" style={{ fontSize: "12px", color: "var(--text-tertiary)", textDecoration: "none", letterSpacing: "0.04em" }}>About</a>
-          <span style={{ fontSize: "12px", color: "var(--text-tertiary)", letterSpacing: "0.05em" }}>{today}</span>
-        </div>
-      </nav>
+      <SiteNav current="market" />
 
       <a href="https://www.apple.com" target="_blank" rel="noopener noreferrer" style={{
         display: "block", position: "relative", overflow: "hidden",

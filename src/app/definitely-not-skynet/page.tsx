@@ -5,7 +5,7 @@ export const revalidate = 60
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -54,12 +54,13 @@ export default async function DefinitelyNotSkynet() {
           letterSpacing: "0.03em", color: "var(--fg)", textDecoration: "none",
         }}>Techlomerate</a>
         <div style={{ display: "flex", gap: "20px", alignItems: "center", flexWrap: "wrap" }}>
-          <a href="/the-old-market" style={{ fontSize: "12px", color: "var(--teal-600)", textDecoration: "none", letterSpacing: "0.04em" }}>The Old Market</a>
-          <a href="/one-recursive-loop" style={{ fontSize: "12px", textDecoration: "none", letterSpacing: "0.04em" }}>
+          <a href="/the-old-market" style={{ fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500, color: "var(--teal-600)", textDecoration: "none", letterSpacing: "0.03em" }}>The Old Market</a>
+          <a href="/one-recursive-loop" style={{ fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500, textDecoration: "none", letterSpacing: "0.03em" }}>
             <span style={{ color: "#F25430" }}>One</span>{" "}
             <span style={{ color: "#4A90E2" }}>Recursive</span>{" "}
             <span style={{ color: "#9013FE" }}>Loop</span>
           </a>
+          <a href="/the-thirst" style={{ fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500, color: "#FF2A6D", textDecoration: "none", letterSpacing: "0.03em" }}>The Thirst</a>
           <a href="/about" style={{ fontSize: "12px", color: "var(--text-tertiary)", textDecoration: "none", letterSpacing: "0.04em" }}>About</a>
         </div>
       </nav>

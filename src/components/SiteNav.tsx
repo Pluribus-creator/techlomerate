@@ -70,7 +70,8 @@ function CurrentWordmark({ current }: { current: Current }) {
   if (current === 'market') return <span style={{ ...base, color: 'var(--teal-600)' }}>The Old Market</span>
   if (current === 'loop') return <span style={{ ...base, ...rainbowText }}>One Recursive Loop</span>
   if (current === 'thirst') return <span style={{ ...base, color: '#FF2A6D' }}>The Thirst</span>
-  return null // home + skynet show no current-desk label in the nav
+  if (current === 'skynet') return <span style={{ ...base, color: '#E8A33D' }}>Definitely Not Skynet</span>
+  return null // home shows no current-desk label in the nav
 }
 
 const ORDER: Desk[] = ['market', 'loop', 'skynet', 'thirst']
@@ -80,7 +81,7 @@ export default function SiteNav({ current }: { current: Current }) {
     weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
   })
   const others = ORDER.filter((d) => d !== current)
-  const showSeparator = current === 'market' || current === 'loop' || current === 'thirst'
+  const showSeparator = current === 'market' || current === 'loop' || current === 'thirst' || current === 'skynet'
 
   return (
     <>

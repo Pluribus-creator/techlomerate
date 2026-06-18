@@ -34,6 +34,8 @@ export default function Footer() {
             <span style={{ color: "#4A90E2" }}>Recursive</span>{" "}
             <span style={{ color: "#9013FE" }}>Loop</span>
           </a>
+          <a href="/definitely-not-skynet" style={{ fontSize: "12px", color: "#E8A33D", textDecoration: "none", letterSpacing: "0.04em" }}>Definitely Not Skynet</a>
+          <a href="/the-thirst" style={{ fontSize: "12px", color: "#FF2A6D", textDecoration: "none", letterSpacing: "0.04em" }}>The Thirst</a>
         </div>
       </div>
       <div style={{

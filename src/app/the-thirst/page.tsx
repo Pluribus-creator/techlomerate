@@ -27,6 +27,16 @@ const readerLabel: Record<string, string> = {
   both:      'For everyone',
 }
 
+function slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim()
+    .slice(0, 80)
+}
+
 function Badges({ article }: { article: any }) {
   const v = article.verdict ? verdictStyles[article.verdict] : null
   return (
@@ -97,10 +107,12 @@ export default async function TheThirstPage() {
             <article style={{ marginBottom: '48px' }}>
               {featured.image_url && (
                 <div style={{ marginBottom: '24px' }}>
-                  <img src={featured.image_url} alt={featured.title} style={{
-                    width: '100%', height: '439px', objectFit: 'cover',
-                    objectPosition: 'center', borderRadius: '4px', display: 'block',
-                  }} />
+                  <a href={`/the-thirst/${slugify(featured.title)}`}>
+                    <img src={featured.image_url} alt={featured.title} style={{
+                      width: '100%', height: '439px', objectFit: 'cover',
+                      objectPosition: 'center', borderRadius: '4px', display: 'block',
+                    }} />
+                  </a>
                 </div>
               )}
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px', flexWrap: 'wrap' }}>
@@ -113,7 +125,7 @@ export default async function TheThirstPage() {
                 fontFamily: 'var(--font-serif)', fontSize: '34px', fontWeight: 500,
                 lineHeight: 1.25, marginBottom: '18px', maxWidth: '600px',
               }}>
-                <a href={featured.source_url} target="_blank" rel="noopener noreferrer"
+                <a href={`/the-thirst/${slugify(featured.title)}`}
                   style={{ color: 'inherit', textDecoration: 'none', borderBottom: '0.5px solid var(--border)' }}>
                   {featured.title}
                 </a>
@@ -143,10 +155,12 @@ export default async function TheThirstPage() {
               <article key={article.id}>
                 {article.image_url && (
                   <div style={{ marginBottom: '16px' }}>
-                    <img src={article.image_url} alt={article.title} style={{
-                      width: '100%', height: '220px', objectFit: 'cover',
-                      objectPosition: 'center', borderRadius: '4px', display: 'block',
-                    }} />
+                    <a href={`/the-thirst/${slugify(article.title)}`}>
+                      <img src={article.image_url} alt={article.title} style={{
+                        width: '100%', height: '220px', objectFit: 'cover',
+                        objectPosition: 'center', borderRadius: '4px', display: 'block',
+                      }} />
+                    </a>
                   </div>
                 )}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px', flexWrap: 'wrap' }}>
@@ -159,7 +173,7 @@ export default async function TheThirstPage() {
                   fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: 500,
                   lineHeight: 1.35, marginBottom: '10px',
                 }}>
-                  <a href={article.source_url} target="_blank" rel="noopener noreferrer"
+                  <a href={`/the-thirst/${slugify(article.title)}`}
                     style={{ color: 'inherit', textDecoration: 'none', borderBottom: '0.5px solid var(--border)' }}>
                     {article.title}
                   </a>

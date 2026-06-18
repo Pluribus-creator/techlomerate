@@ -1,4 +1,5 @@
 import Footer from '@/components/Footer'
+import SiteNav from '@/components/SiteNav'
 import { createClient } from '@supabase/supabase-js'
 
 export const revalidate = 60
@@ -42,28 +43,7 @@ export default async function DefinitelyNotSkynet() {
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg)" }}>
 
-      <div style={{ height: "2px", background: "#E8A33D" }} />
-
-      <nav style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "18px 40px", borderBottom: "0.5px solid #E8A33D",
-        position: "sticky", top: 0, zIndex: 99, background: "var(--bg)", flexWrap: "wrap", gap: "10px",
-      }}>
-        <a href="/" style={{
-          fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 500,
-          letterSpacing: "0.03em", color: "var(--fg)", textDecoration: "none",
-        }}>Techlomerate</a>
-        <div style={{ display: "flex", gap: "20px", alignItems: "center", flexWrap: "wrap" }}>
-          <a href="/the-old-market" style={{ fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500, color: "var(--teal-600)", textDecoration: "none", letterSpacing: "0.03em" }}>The Old Market</a>
-          <a href="/one-recursive-loop" style={{ fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500, textDecoration: "none", letterSpacing: "0.03em" }}>
-            <span style={{ color: "#F25430" }}>One</span>{" "}
-            <span style={{ color: "#4A90E2" }}>Recursive</span>{" "}
-            <span style={{ color: "#9013FE" }}>Loop</span>
-          </a>
-          <a href="/the-thirst" style={{ fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 500, color: "#FF2A6D", textDecoration: "none", letterSpacing: "0.03em" }}>The Thirst</a>
-          <a href="/about" style={{ fontSize: "12px", color: "var(--text-tertiary)", textDecoration: "none", letterSpacing: "0.04em" }}>About</a>
-        </div>
-      </nav>
+      <SiteNav current="skynet" />
 
       {/* Masthead */}
       <div style={{ maxWidth: "780px", margin: "0 auto", padding: "56px 40px 32px", textAlign: "center" }}>

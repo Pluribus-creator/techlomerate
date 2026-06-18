@@ -80,7 +80,7 @@ export default async function OneRecursiveLoopPage() {
               {featured.image_url && (
                 <div style={{ marginBottom: "24px" }}>
                   <img src={featured.image_url} alt={featured.title} style={{
-                    width: "100%", height: "439px", objectFit: "cover",
+                    width: "100%", aspectRatio: "3 / 2", objectFit: "cover",
                     objectPosition: "center", borderRadius: "4px", display: "block",
                   }} />
                 </div>
@@ -122,7 +122,7 @@ export default async function OneRecursiveLoopPage() {
                 {article.image_url && (
                   <div style={{ marginBottom: "16px" }}>
                     <img src={article.image_url} alt={article.title} style={{
-                      width: "100%", height: "220px", objectFit: "cover",
+                      width: "100%", aspectRatio: "3 / 2", objectFit: "cover",
                       objectPosition: "center", borderRadius: "4px", display: "block",
                     }} />
                   </div>

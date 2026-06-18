@@ -76,7 +76,7 @@ export default async function DefinitelyNotSkynet() {
             {featured.image_url && (
               <div style={{ marginBottom: "20px", borderRadius: "4px", overflow: "hidden" }}>
                 <img src={featured.image_url} alt={featured.title} style={{
-                  width: "100%", height: "439px", objectFit: "cover", display: "block",
+                  width: "100%", aspectRatio: "3 / 2", objectFit: "cover", display: "block",
                 }} />
               </div>
             )}
@@ -105,7 +105,7 @@ export default async function DefinitelyNotSkynet() {
               {article.image_url && (
                 <div style={{ marginBottom: "16px", borderRadius: "4px", overflow: "hidden" }}>
                   <img src={article.image_url} alt={article.title} style={{
-                    width: "100%", height: "220px", objectFit: "cover", objectPosition: "center 30%", display: "block",
+                    width: "100%", aspectRatio: "3 / 2", objectFit: "cover", objectPosition: "center 30%", display: "block",
                   }} />
                 </div>
               )}

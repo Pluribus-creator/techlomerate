@@ -68,7 +68,7 @@ export default async function Home() {
                 <div style={{ marginBottom: "24px" }}>
                   <a href={`/articles/${slugify(featured.title)}`}>
                     <img src={featured.image_url} alt={featured.title} style={{
-                      width: "100%", height: "439px", objectFit: "cover",
+                      width: "100%", aspectRatio: "3 / 2", objectFit: "cover",
                       objectPosition: "center", borderRadius: "4px", display: "block",
                     }} />
                   </a>
@@ -107,7 +107,7 @@ export default async function Home() {
                   <div style={{ marginBottom: "16px" }}>
                     <a href={`/articles/${slugify(article.title)}`}>
                       <img src={article.image_url} alt={article.title} style={{
-                        width: "100%", height: "220px", objectFit: "cover",
+                        width: "100%", aspectRatio: "3 / 2", objectFit: "cover",
                         objectPosition: "center", borderRadius: "4px", display: "block",
                       }} />
                     </a>

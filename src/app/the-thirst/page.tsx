@@ -80,9 +80,7 @@ export default async function TheThirstPage() {
           fontSize: '12px', color: 'var(--text-tertiary)', lineHeight: 1.6,
           padding: '16px 20px', borderLeft: `2px solid ${MAGENTA}`, marginBottom: '40px',
         }}>
-          Gear worth caring about — for the one who buys the new thing and the one who keeps it for a decade.
-          No hype, no envy, and when the honest answer is don&apos;t buy it, we&apos;ll say so.
-          Affiliate links, where they appear, never change what we recommend or fund our other desks.
+          Thirst traps for the buy curious.
         </div>
       </div>
 

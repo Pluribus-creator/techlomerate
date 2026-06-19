@@ -1,4 +1,5 @@
 import Footer from '@/components/Footer'
+import SiteNav from '@/components/SiteNav'
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 
@@ -59,10 +60,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     ?.filter(a => a.id !== article.id && a.category === article.category)
     .slice(0, 3)
 
-  const publishedDate = new Date(article.published_at).toLocaleDateString("en-US", {
-    weekday: "long", month: "long", day: "numeric", year: "numeric",
-  })
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -106,20 +103,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
       <div style={{ height: "2px", background: "var(--teal-400)" }} />
 
-      <nav style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "18px 40px", borderBottom: "0.5px solid var(--border-teal)",
-        position: "sticky", top: 0, zIndex: 99, background: "var(--bg)",
-      }}>
-        <a href="/" style={{
-          fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 500,
-          letterSpacing: "0.03em", color: "var(--fg)", textDecoration: "none",
-        }}>Techlomerate (tek-lom-uh-RAH-tee)</a>
-        <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
-          <a href="/about" style={{ fontSize: "12px", color: "var(--text-tertiary)", textDecoration: "none", letterSpacing: "0.04em" }}>About</a>
-          <span style={{ fontSize: "12px", color: "var(--text-tertiary)", letterSpacing: "0.05em" }}>{publishedDate}</span>
-        </div>
-      </nav>
+      <SiteNav current="home" />
 
       <a href="https://www.apple.com" target="_blank" rel="noopener noreferrer" style={{
           display: "block", position: "relative", overflow: "hidden",
@@ -150,7 +134,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 alt={article.title}
                 style={{
                   width: "100%",
-                  height: "439px",
+                  aspectRatio: "3 / 2",
                   objectFit: "cover",
                   objectPosition: "center",
                   borderRadius: "4px",
